@@ -3,6 +3,14 @@ jam
 
 Smart pinto glue.
 
+prerequisites
+===
+pinto client should be installed, jam should be run on the same environment as pinto does. PINTO_REPOSITORY_ROOT and
+PINTO_EDITOR should be set as shown in example.
+
+synopsis
+===
+
 Jam is glue between pinto and your scm. Let's see on example how one can use it when building perl applications.
 
 example
