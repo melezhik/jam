@@ -46,8 +46,8 @@ cat Build.PL:
     
   
 As you can see there are some prerequisites - version, DBD::mysql, DBI - we will let pinto to take care about all of them.
-Also, let's say we store our project source code in our favourite scm, for the example given it is [SVN](https://www.google.ru/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&ved=0CC0QFjAA&url=http%3A%2F%2Fsubversion.tigris.org%2F&ei=INLfUdb5L8am4gTtqIDgAg&usg=AFQjCNECDGdYIfVJA74uPGr3-JKbCKXFWQ&sig2=kdk8hvK_NIdrbBps0nqiNg&bvm=bv.48705608,d.bGE), 
-jam now in prototype stage, but in the future more scms may come soon, of-course I like [git](https://www.google.ru/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&ved=0CCoQFjAA&url=http%3A%2F%2Fgit-scm.com%2F&ei=CNLfUZjdCuSl4AS6t4DICA&usg=AFQjCNHBOAWIJWLQ6wmj_GErAgGzWCkTbA&sig2=1Nvm6cEv8gX4y-i3n4kOmQ&bvm=bv.48705608,d.bGE) too :))
+Also, let's say we store our project source code in our favourite scm, for the example given it is [SVN](http://subversion.tigris.org), 
+jam now in prototype stage, but in the future more scms may come soon, of-course I like [git](http://git-scm.com/) too :))
 
     cd jam
     mkdir hello-world-example
