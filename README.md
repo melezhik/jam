@@ -20,7 +20,7 @@ First of all  checkout and install jam from git repository:
     cd jam && bundle install
     
 
-For the sake of simplicity let's take a simple [Module::Build](http://search.cpan.org/perldoc?Module%3A%3ABuild) based project, we gonna gonna add to pinto.
+For the sake of simplicity let's take a simple [Module::Build](http://search.cpan.org/perldoc?Module%3A%3ABuild) based project, we gonna build with pinto.
 cat Build.PL:
     
          
