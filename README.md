@@ -96,6 +96,11 @@ And finally  stack is parameter to choose certain pinto stack when adding/pullin
 
     pinto new hello-world-example-stack
 
+Now, let's try our smart jam glue to build our application:
+
+    jam.rb -p ./hello-world-example
+    
+    
 
 
 
