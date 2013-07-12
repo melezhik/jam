@@ -10,7 +10,7 @@ opts = Trollop::options do
 
   version "jam 0.1.0 (c) 2013 Alexey Melezhik"
   banner <<-EOS
-build perl projects, using awseome pinto engine.
+smart glue between pinto and your scm.
 
 Usage:
        ./jam.rb [options]
@@ -19,8 +19,6 @@ EOS
 
     opt :p, "path to project", :type => :string
     opt :fast, "run is fast mode, skip some build steps", :default => false
-    #opt :name, "Monkey name", :type => :string        # string --name <s>, default nil
-    #opt :num_limbs, "Number of limbs", :default => 4  # integer --num-limbs <i>, default to 4
 end
 
 project_id = "#{Dir.pwd}/#{opts[:p]}"
