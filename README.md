@@ -58,7 +58,7 @@ jam now in prototype stage, but in the future more scms may be supported, of-cou
     drwxr-xr-x 4 pinto pinto     4096 Jul  8 15:54 lib
 
 
-Jam is directory based tool, it mean you should point a directory to it to make it's work:
+Jam is directory based tool, it mean you should point a directory to to make it work:
 
     ./jam.rb -p ./hello-world-example
     
