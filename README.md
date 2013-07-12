@@ -1,6 +1,5 @@
 jam
 ===
-
 Smart pinto glue.
 
 prerequisites
@@ -11,18 +10,18 @@ PINTO_EDITOR should be set as shown in example.
 synopsis
 ===
 
-Jam is glue between pinto and your scm. Let's see on example how one can use it when building perl applications.
+Jam is glue between pinto and your scm. Let's see on example how one can use it when build perl applications.
 
 example
 ===
 
-First checkout jam from git repository:
+First of all  checkout and install jam from git repository:
 
     git clone https://github.com/melezhik/jam.git
     cd jam && bundle install
     
 
-For the sake of simplicity let's take simple Module::Build based project we gonna gonna build with pinto.
+For the sake of simplicity let's take a simple Module::Build based project, we gonna gonna add to pinto.
 cat Build.PL:
     
          
@@ -47,9 +46,9 @@ cat Build.PL:
     
     
   
-As you can see there are some prerequisites - version, DBD::mysql, DBI - but let pinto take care about them.
-Let's say we store our project in our favourite scm, for now jam only supports svn, but because now it's only prototype
-more scms may come soon, of-course I like git too :))
+As you can see there are some prerequisites - version, DBD::mysql, DBI - we will let pinto to take care about all of them.
+Also, let's say we store our project source code in our favourite scm, for the example given it is SVN, 
+jam now in prototype stage, but in the future more scms may come soon, of-course I like git too :))
 
     cd jam
     mkdir hello-world-example
@@ -64,8 +63,8 @@ Jam is directory based tool, it mean you should point a directory to it to make 
 
     ./jam.rb -p ./hello-world-example
     
-Okay, I had it almost right, but I "forget" about some tiny configuration file for jam glue may do things correctly.
-cat ./hello-world-example/jam.json
+Okay, I had it almost right, but I "forget" about some tiny configuration file for jam may glue things correctly. This is
+jam json file. cat ./hello-world-example/jam.json
 
     {
         "stack" : "hello-world-example-stack",
@@ -75,15 +74,14 @@ cat ./hello-world-example/jam.json
         ]
     }
 
-The configuration data are self explanatory. But let's clarify some of parameters. Sources - is array of directories where 
-sources come from. For given example there is only one source - application itself, but there might be more, let say we want
-more libraries on which our application may depend on:
+The configuration data are pretty self-explanatory. But let's clarify some of parameters. Sources - is array of directories where 
+source code comes from. Right now there is only one source - application source code, but there might be more, what if we want
+more libraries on which our application code may depend on ? It's easy to add one: 
 
 
     svn co http://your-svn-repository/apps/HelloWorldLib/tags/version-0.0.2 HelloWorldLib/latest-version
    
-
-cat ./hello-world-example/jam.json
+Now we need to add new source to jam json file. cat ./hello-world-example/jam.json
 
     {
         "stack" : "hello-world-example-stack",
@@ -95,17 +93,15 @@ cat ./hello-world-example/jam.json
     }
 
 
-It may be necessarily to say, that "sources" are processed in order, if one source code "A" is depended on other "B", 
-than "A" should followed by "B" in "sources" list.
+It is necessarily to say, that _elements in "sources" are processed in order_, if one source code "A" is depended on other "B", 
+than "A" should be followed by "B" in "sources" list.
 
 
-Application parameter points to directory holding application source code. When I say application I mean that final distributive 
-will be based on the "application" source code, this distributive will hold:
- - all other dependencies  ( taken from "sources" list  ) 
- - and source code of application
+Application parameter points to the directory that will be choosen to make distibutive from. 
+After all the distribuitve will hold all dependencies taken from "sources" list + source code in application "directory"
 
-
-And finally  stack is parameter to choose certain pinto stack when adding/pulling dependencies to pinto.
+And finally the stack parameter points certain pinto stack when adding/pulling dependencies to pinto. Of-course
+we should create it before:
 
     pinto new hello-world-example-stack
 
