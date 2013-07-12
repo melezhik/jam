@@ -107,7 +107,6 @@ Now, let's try our smart jam glue to build our application:
 
     ./jam.rb -p ./hello-world-example
     
-    pinto@web3-tst3:~/jam$ ./jam.rb -p ./hello-world-example
     At revision 62676.
     Attempting to create directory /home/pinto/jam/hello-world-example/cpanlib
     Can't find dist packages without a MANIFEST file
