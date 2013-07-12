@@ -51,7 +51,7 @@ Jam is directory based tool, it mean you should point a directory to it to make 
 
     jam.rb ./hello-world-example
     
-Okay, I had it almost right, but I "forget" abount some tiny configuration file for jam glue may do things correctly.
+Okay, I had it almost right, but I "forget" about some tiny configuration file for jam glue may do things correctly.
 cat ./hello-world-example/jam.json
 
     {
@@ -62,7 +62,38 @@ cat ./hello-world-example/jam.json
         ]
     }
 
+The configuration data are self explanatory. But let's clearfy some of parameres. Sources - is array of directories where 
+sources come from. For given exmaple there is only one source - application itself, but there might be more, let say we want
+more libraries on which our application may depened on:
 
+
+    svn co http://your-svn-repository/apps/HelloWorldLib/tags/version-0.0.2 HelloWorldLib/latest-version
    
+
+cat ./hello-world-example/jam.json
+
+    {
+        "stack" : "hello-world-exmaple-stack",
+        "application": "HelloWorldApp/trunk",
+        "sources": [
+            "HelloWorldLib/latest-version",
+            "HelloWorldApp/trunk"
+        ]
+    }
+
+
+It may be necessarily to say, that "sources" are processed in order, if one source code "A" is depended on other "B", 
+than "A" should followed by "B" in "sources" list.
+
+
+Application parameter points to directory holding application source code. When I say application I mean that final distributive 
+will be based on the "application" source code, this distributive will hold:
+ - all other dependencies  ( taken from "sources" list  ) 
+ - and source code of application
+
+
+ 
+
+
 
 
