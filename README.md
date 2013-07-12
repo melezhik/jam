@@ -10,7 +10,8 @@ example
 
 First checkout jam from git repository:
 
-    git clone https://github.com/melezhik/jam.git 
+    git clone https://github.com/melezhik/jam.git
+    cd jam && bundle install
     
 
 For the sake of simplicity let's take simple Module::Build based project we gonna gonna build with pinto.
