@@ -265,11 +265,13 @@ Now, let's try our smart jam glue to build our application:
 
 After all we have all our stuff get pulled to pinto repository:
 
-     pinto list -s hello-world-example-stack -D HelloWorld
-     [rl-] HelloWorld::App                                v0.1.0 PINTO/HelloWorld-App-v0.1.0.tar.gz
-     [rl-] HelloWorld::Lib                                v0.0.2 PINTO/HelloWorld-Lib-v0.0.2.tar.gz
+     pinto list -s hello-world-example-stack
      
-     
+And also we have distributive with _ALL_ dependencies ready to use:
+
+    hello-world-example/HelloWorldApp/trunk/HelloWorld-App-v0.1.0.tar.gz
+    
+    
 
 
 
