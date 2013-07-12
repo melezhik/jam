@@ -102,6 +102,9 @@ And finally  stack is parameter to choose certain pinto stack when adding/pullin
 
 Now, let's try our smart jam glue to build our application:
 
+    export PINTO_EDITOR=cat
+    export PINTO_REPOSITORY_ROOT=/home/pinto/repo2/
+
     ./jam.rb -p ./hello-world-example
     
     pinto@web3-tst3:~/jam$ ./jam.rb -p ./hello-world-example
@@ -257,6 +260,13 @@ Now, let's try our smart jam glue to build our application:
         
 
 
+After all we have all our stuff get pulled to pinto repository:
+
+     pinto list -s hello-world-example-stack -D HelloWorld
+     [rl-] HelloWorld::App                                v0.1.0 PINTO/HelloWorld-App-v0.1.0.tar.gz
+     [rl-] HelloWorld::Lib                                v0.0.2 PINTO/HelloWorld-Lib-v0.0.2.tar.gz
+     
+     
 
 
 
