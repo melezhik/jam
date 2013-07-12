@@ -36,7 +36,7 @@ cat Build.PL:
   
 As you can see there are some prerequisites - version, DBD::mysql, DBI - but let pinto take care about them.
 Let's say we store our project in our favourite scm, for now jam only supports svn, but because now it's only prototype
-more scms may come soon, ofcourse I like git too :))
+more scms may come soon, of-course I like git too :))
 
 
     mkdir hello-world-example
@@ -55,16 +55,16 @@ Okay, I had it almost right, but I "forget" about some tiny configuration file f
 cat ./hello-world-example/jam.json
 
     {
-        "stack" : "hello-world-exmaple-stack",
+        "stack" : "hello-world-example-stack",
         "application": "HelloWorldApp/trunk",
         "sources": [
             "HelloWorldApp/trunk",
         ]
     }
 
-The configuration data are self explanatory. But let's clearfy some of parameres. Sources - is array of directories where 
-sources come from. For given exmaple there is only one source - application itself, but there might be more, let say we want
-more libraries on which our application may depened on:
+The configuration data are self explanatory. But let's clarify some of parameters. Sources - is array of directories where 
+sources come from. For given example there is only one source - application itself, but there might be more, let say we want
+more libraries on which our application may depend on:
 
 
     svn co http://your-svn-repository/apps/HelloWorldLib/tags/version-0.0.2 HelloWorldLib/latest-version
@@ -73,7 +73,7 @@ more libraries on which our application may depened on:
 cat ./hello-world-example/jam.json
 
     {
-        "stack" : "hello-world-exmaple-stack",
+        "stack" : "hello-world-example-stack",
         "application": "HelloWorldApp/trunk",
         "sources": [
             "HelloWorldLib/latest-version",
@@ -92,7 +92,11 @@ will be based on the "application" source code, this distributive will hold:
  - and source code of application
 
 
- 
+And finally  stack is parameter to choose certain pinto stack when adding/pulling dependencies to pinto.
+
+    pinto new hello-world-example-stack
+
+
 
 
 
