@@ -35,15 +35,34 @@ cat Build.PL:
     
   
 As you can see there are some prerequisites - version, DBD::mysql, DBI - but let pinto take care about them.
-Let's say we store out project in our favourite scm, for now jam only supports svn, but because it's only prototype
+Let's say we store our project in our favourite scm, for now jam only supports svn, but because now it's only prototype
 more scms may come soon, ofcourse I like git too :))
 
 
-    mkdir hello-world
-    svn co http://your-svn-repository/apps/HelloWorldApp/ HelloWorldApp
-    ls -l HelloWorldApp
+    mkdir hello-world-example
+    cd  hello-world-example
+    svn co http://your-svn-repository/apps/HelloWorldApp/trunk HelloWorldApp/trunk
+    ls -l HelloWorldApp/trunk
     -rw-r--r-- 1 pinto pinto     1792 Jul  9 12:38 Build.PL
     drwxr-xr-x 4 pinto pinto     4096 Jul  8 15:54 lib
 
+
+Jam is directory based tool, it mean you should point a directory to it to make it's work:
+
+    jam.rb ./hello-world-example
+    
+Okay, I had it almost right, but I "forget" abount some tiny configuration file for jam glue may do things correctly.
+cat ./hello-world-example/jam.json
+
+    {
+        "stack" : "hello-world-exmaple-stack",
+        "application": "HelloWorldApp/trunk",
+        "sources": [
+            "HelloWorldApp/trunk",
+        ]
+    }
+
+
+   
 
 
