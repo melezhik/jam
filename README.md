@@ -2,7 +2,7 @@ jam
 ===
 Smart [pinto](https://github.com/thaljef/Pinto) glue. 
 
-Jam is glue between pinto and your [scm](https://en.wikipedia.org/wiki/Revision_control). See and example further on how one can use jam and pinto to build perl applications.
+Jam is glue between pinto and your [scm](https://en.wikipedia.org/wiki/Revision_control). See and example further on how one can use jam and pinto to build [perl](http://www.perl.org/) applications.
 
 
 prerequisites
