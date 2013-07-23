@@ -112,7 +112,7 @@ Now, let's try our smart layer glue to build our application:
     layer -p ./hello-world-example
     
     At revision 62676.
-    Attempting to create directory /home/pinto/layer/hello-world-example/cpanlib
+    Attempting to create directory /home/pinto/layer-projects/hello-world-example/cpanlib
     Can't find dist packages without a MANIFEST file
     Run 'Build manifest' to generate one
     
