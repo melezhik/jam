@@ -8,12 +8,12 @@ include Term::ANSIColor
 
 opts = Trollop::options do
 
-  version "jam 0.1.0 (c) 2013 Alexey Melezhik"
+  version "layer 0.1.0 (c) 2013 Alexey Melezhik"
   banner <<-EOS
 smart glue between pinto and your scm.
 
 Usage:
-       ./jam.rb [options]
+       layer [options]
 where [options] are:
 EOS
 
@@ -29,7 +29,7 @@ if (opts[:p].nil? || opts[:p].empty?)
 end
 
 
-config = JSON.parse(File.read("#{project_id}/jam.json"))
+config = JSON.parse(File.read("#{project_id}/layer.json"))
 
 config['sources'].each do |src|
 
