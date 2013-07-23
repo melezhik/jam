@@ -16,7 +16,7 @@ example
 
 First of all  checkout and install layer from git repository:
 
-    gem install layer
+    gem install layer --pre
     
 
 For the sake of simplicity let's take a simple [Module::Build](http://search.cpan.org/perldoc?Module%3A%3ABuild) based project, we gonna build with pinto.
