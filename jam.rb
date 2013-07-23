@@ -71,7 +71,7 @@ end
 
 
 puts yellow { bold {  "make distributive from #{config['application']}" } }
-cmd = "eval $(perl -Mlocal::lib=#{local_lib}) && cd #{project_id}/#{config['application']} && rm -rf cpanlib && mkdir cpanlib/ && cp -r #{local_lib}/* cpanlib/ && rm -rf *.gz && ./Build realclean --quiet 1>/dev/null && perl Build.PL --quiet 1>/dev/null && ./Build manifest --quiet 2>/dev/null 1>/dev/null && ./Build dist --quiet 1>/dev/null && ls *.gz > #{project_id}/current.txt"
+cmd = "eval $(perl -Mlocal::lib=#{local_lib}) && cd #{project_id}/#{config['application']} && rm -rf cpanlib && mkdir cpanlib/ && cp -r #{local_lib}/* cpanlib/ && rm -rf *.gz && ./Build realclean --quiet 1>/dev/null && perl Build.PL --quiet 1>/dev/null && ./Build manifest --quiet 2>/dev/null 1>/dev/null && ./Build dist --quiet 1>/dev/null && ln -fs `ls #{project_id}/#{config['application']}/*.gz` #{project_id}/current.tar.gz && echo -n `ls *.gz` > #{project_id}/current.txt"
 system(cmd) == true or raise "failed do cmd: #{cmd}"
 
 
