@@ -16,7 +16,7 @@ example
 
 First of all  checkout and install pjam from git repository:
 
-    gem install pjam --pre --no-ri --no-rdoc
+    gem install pjam --pre
     
 
 For the sake of simplicity let's take a simple [Module::Build](http://search.cpan.org/perldoc?Module%3A%3ABuild) based project, we gonna build with pinto.
