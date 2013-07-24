@@ -1,8 +1,0 @@
-{
-    "stack" : "hello-world-example-stack",
-    "application": "HelloWorldApp/trunk",
-    "sources": [
-        "HelloWorldLib/latest-version",
-        "HelloWorldApp/trunk"
-    ]
-}
