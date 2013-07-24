@@ -1,22 +1,22 @@
-layer
+pjam
 ===
 Smart [pinto](https://github.com/thaljef/Pinto) glue. 
 
-layer is glue between pinto and your [scm](https://en.wikipedia.org/wiki/Revision_control). See an example further on how one can use layer and pinto to build [perl](http://www.perl.org/) applications.
+pjam is glue between pinto and your [scm](https://en.wikipedia.org/wiki/Revision_control). See an example further on how one can use layer and pinto to build [perl](http://www.perl.org/) applications.
 
 
 prerequisites
 ===
-pinto client should be installed, layer should be run on the same environment as pinto does. PINTO_REPOSITORY_ROOT and
+pinto client should be installed, pjam should be run on the same environment as pinto does. PINTO_REPOSITORY_ROOT and
 PINTO_EDITOR should be set as shown in example.
 
 
 example
 ===
 
-First of all  checkout and install layer from git repository:
+First of all  checkout and install pjam from git repository:
 
-    gem install layer --pre --no-ri --no-rdoc
+    gem install pjam --pre --no-ri --no-rdoc
     
 
 For the sake of simplicity let's take a simple [Module::Build](http://search.cpan.org/perldoc?Module%3A%3ABuild) based project, we gonna build with pinto.
@@ -46,10 +46,10 @@ cat Build.PL:
   
 As you can see there are some prerequisites - version, DBD::mysql, DBI - we will let pinto to take care about all of them.
 Also, let's say we store our project source code in our favourite scm, for the example given it is [SVN](http://subversion.tigris.org), 
-layer now in prototype stage, but in the future more scms may be supported, of-course I like [git](http://git-scm.com/) too :))
+pjam now in prototype stage, but in the future more scms may be supported, of-course I like [git](http://git-scm.com/) too :))
 
-    mkdir layer-projects
-    cd layer-projects
+    mkdir pjam-projects
+    cd pjam-projects
     mkdir hello-world-example
     cd  hello-world-example
     svn co http://your-svn-repository/apps/HelloWorldApp/trunk HelloWorldApp/trunk
@@ -58,12 +58,12 @@ layer now in prototype stage, but in the future more scms may be supported, of-c
     drwxr-xr-x 4 pinto pinto     4096 Jul  8 15:54 lib
 
 
-layer is directory based tool, it mean you should point a directory to to make it work:
+pjam is directory based tool, it mean you should point a directory to to make it work:
 
-    layer -p ./hello-world-example
+    pjam -p ./hello-world-example
     
-Okay, I had it almost right, but I "forget" about some tiny configuration file for layer may glue things correctly. This is
-layer json file. cat ./hello-world-example/layer.json
+Okay, I had it almost right, but I "forget" about some tiny configuration file for pjam may glue things correctly. This is
+pjam json file. cat ./hello-world-example/layer.json
 
     {
         "stack" : "hello-world-example-stack",
@@ -80,7 +80,7 @@ more libraries on which our application code may depend on ? It's easy to add on
 
     svn co http://your-svn-repository/apps/HelloWorldLib/tags/version-0.0.2 HelloWorldLib/latest-version
    
-Now we need to add new source to layer json file. cat ./hello-world-example/layer.json
+Now we need to add new source to pjam json file. cat ./hello-world-example/layer.json
 
     {
         "stack" : "hello-world-example-stack",
@@ -104,15 +104,15 @@ we should create it before:
 
     pinto new hello-world-example-stack
 
-Now, let's try our smart layer glue to build our application:
+Now, let's try our smart pjam glue to build our application:
 
     export PINTO_EDITOR=cat
     export PINTO_REPOSITORY_ROOT=/home/pinto/repo2/
 
-    layer -p ./hello-world-example
+    pjam -p ./hello-world-example
     
     At revision 62676.
-    Attempting to create directory /home/pinto/layer-projects/hello-world-example/cpanlib
+    Attempting to create directory /home/pinto/pjam-projects/hello-world-example/cpanlib
     Can't find dist packages without a MANIFEST file
     Run 'Build manifest' to generate one
     

@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
-  s.name        = 'layer'
+  s.name        = 'pjam'
   s.version     = '0.0.3.pre'
   s.date        = '2013-07-23'
   s.summary     = "smart pinto glue"
-  s.description = "Smart pinto glue - layer between source code and pinto"
+  s.description = "Smart pinto glue - jam between source code and pinto"
   s.authors     = ["Alexey Melezhik"]
   s.email       = 'melezhik@gmail.com'
   s.license = 'MIT'
@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "term-ansicolor"
   s.add_runtime_dependency "trollop"
 
-  s.executables << 'layer'
+  s.executables << 'pjam'
   s.homepage    =
     'https://github.com/melezhik/jam'
 end
