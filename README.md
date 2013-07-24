@@ -2,7 +2,7 @@ pjam
 ===
 Smart [pinto](https://github.com/thaljef/Pinto) glue. 
 
-pjam is glue between pinto and your [scm](https://en.wikipedia.org/wiki/Revision_control). See an example further on how one can use layer and pinto to build [perl](http://www.perl.org/) applications.
+pjam is glue between pinto and your [scm](https://en.wikipedia.org/wiki/Revision_control). See an example further on how one can use pjam and pinto to build [perl](http://www.perl.org/) applications.
 
 
 prerequisites
@@ -63,7 +63,7 @@ pjam is directory based tool, it mean you should point a directory to to make it
     pjam -p ./hello-world-example
     
 Okay, I had it almost right, but I "forget" about some tiny configuration file for pjam may glue things correctly. This is
-pjam json file. cat ./hello-world-example/layer.json
+pjam json file. cat ./hello-world-example/pjam.json
 
     {
         "stack" : "hello-world-example-stack",
@@ -80,7 +80,7 @@ more libraries on which our application code may depend on ? It's easy to add on
 
     svn co http://your-svn-repository/apps/HelloWorldLib/tags/version-0.0.2 HelloWorldLib/latest-version
    
-Now we need to add new source to pjam json file. cat ./hello-world-example/layer.json
+Now we need to add new source to pjam json file. cat ./hello-world-example/pjam.json
 
     {
         "stack" : "hello-world-example-stack",
