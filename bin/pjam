@@ -19,7 +19,9 @@ EOS
 
     opt :p, "path to project", :type => :string
     opt :fast, "run is fast mode, skip some build steps", :default => false
+    opt :only, "only build this projects", :type => :string, :default => nil
 end
+
 
 project_id = "#{Dir.pwd}/#{opts[:p]}"
 local_lib = "#{project_id}/cpanlib"
@@ -31,7 +33,16 @@ end
 
 config = JSON.parse(File.read("#{project_id}/pjam.json"))
 
-config['sources'].each do |src|
+
+sources_list = []
+if opts[:only].nil?
+    sources_list = config['sources']
+else
+    p_only = opts[:only].split(/\s+/)
+    sources_list = config['sources'].select {|i| p_only.include? i }
+end
+
+sources_list.each do |src|
 
 
     cmd = "cd #{project_id}/#{src} && rm -rf cpanlib && svn up"
