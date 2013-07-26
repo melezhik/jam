@@ -41,9 +41,10 @@ config['sources'].each do |src|
     cmd = "eval $(perl -Mlocal::lib=#{local_lib}) &&  cd #{project_id}/#{src} && rm -rf *.gz && rm -rf MANIFEST && perl Build.PL --quiet 1>/dev/null  && ./Build manifest --quiet 2>/dev/null 1>/dev/null  && ./Build dist --quiet 1>/dev/null"
     system(cmd) == true or raise "failed do cmd: #{cmd}"
 
-    cmd ="cd #{project_id}/#{src}/ && pinto list -s #{config['stack']}  -D `ls *.gz` --format %f | grep  `ls *.gz` -q"
-    distro_exists = system(cmd)
+#    cmd ="cd #{project_id}/#{src}/ && pinto list -s #{config['stack']}  -D `ls *.gz` --format %f | grep  `ls *.gz` -q"
+#    distro_exists = system(cmd)
 
+    distro_exists = true 
     if distro_exists == false
 	puts dark { blue  { bold {  "add #{src} to pinto for the first time" } } }
         cmd ="cd #{project_id}/#{src} && pinto add -s #{config['stack']} -v `ls *.gz`"
@@ -52,7 +53,7 @@ config['sources'].each do |src|
 
 	puts dark { magenta  { bold {  "delete #{src} from pinto" } } }
         cmd ="cd #{project_id}/#{src}/ && pinto delete -v PINTO/`ls *.gz`"
-	system(cmd) == true or raise "failed do cmd: #{cmd}"
+	system(cmd) == true # or raise "failed do cmd: #{cmd}"
 
 	puts dark { blue  { bold {  "add #{src} to pinto" } } }
         cmd ="cd #{project_id}/#{src} && pinto add -s #{config['stack']} -v `ls *.gz`"
