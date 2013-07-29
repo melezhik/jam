@@ -1,3 +1,6 @@
+# 0.0.4
+- reverted some chages and cleaned up output
+
 # 0.0.3
 - rely upon `pinto install` command not cpaminus when compiling modules
 - do not use local::lib directly
