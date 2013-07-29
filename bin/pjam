@@ -18,7 +18,7 @@ where [options] are:
 EOS
 
     opt :p, "path to project", :type => :string
-    opt :fast, "run is fast mode, skip some build steps", :default => false
+    opt :skip_pinto, "skipp adding distos to pinto", :default => false
     opt :only, "only build this projects", :type => :string, :default => nil
 end
 
@@ -43,33 +43,43 @@ else
 end
 
 compile_list = []
+compile_list_pp = {}
 
 sources_list.each do |src|
-
 
     cmd = "cd #{project_id}/#{src} && rm -rf cpanlib && svn up"
     st = system(cmd) == true or  raise "failed do cmd: #{cmd}" 
 
-    cmd = "cd #{project_id}/#{src} && rm -rf *.gz && rm -rf MANIFEST && perl Build.PL --quiet 1>/dev/null 2>module_build.err.log  && ./Build manifest --quiet 2>/dev/null 1>/dev/null  && ./Build dist --quiet 1>/dev/null"
+    cmd = "cd #{project_id}/#{src} && rm -rf *.gz && rm -rf MANIFEST && perl Build.PL --quiet 1>/dev/null 2>module_build.err.log  && ./Build realclean && perl Build.PL --quiet 1>/dev/null 2>module_build.err.log && ./Build manifest --quiet 2>/dev/null 1>/dev/null  && ./Build dist --quiet 1>/dev/null"
     system(cmd) == true or raise "failed do cmd: #{cmd}"
 
-    puts dark { blue  { bold {  "add #{src} to pinto" } } }
-    
     distro_name = `cd #{project_id}/#{src} &&  ls *.gz`.chomp!
+
+    if opts[:skip_pinto] == true
+
+        compile_list << distro_name
+	compile_list_pp[distro_name] = src
+
+    else
+
+        puts dark { magenta  { bold {  "add #{src} [#{distro_name}] to pinto" } } }    
     
-    cmd ="cd #{project_id}/#{src} && pinto delete -v PINTO/#{distro_name}"
-    system(cmd) == true
+	cmd ="cd #{project_id}/#{src} && pinto delete -v PINTO/#{distro_name}"
+        system(cmd) == true
 
-    cmd ="cd #{project_id}/#{src} && pinto add -s #{config['stack']} -v #{distro_name}"
-    system(cmd) == true or raise "failed do cmd: #{cmd}"
+	cmd ="cd #{project_id}/#{src} && pinto add -s #{config['stack']} -v #{distro_name}"
+        system(cmd) == true or raise "failed do cmd: #{cmd}"
 
-    compile_list << distro_name
+        compile_list << distro_name
+        compile_list_pp[distro_name] = src
 
+    end
+    
 end
 
 
 compile_list.each do |d|
-    puts blue { bold { "compile #{d}" } }
+    puts green { bold { "compile #{compile_list_pp[d]} [#{d}]" } }
     cmd = "pinto install -s #{config['stack']} -L #{local_lib} -o 'q' PINTO/#{d}"
     system(cmd) == true or raise "failed do cmd: #{cmd}"
 end
