@@ -77,7 +77,7 @@ end
 
 config['sources'].each do |src|
     puts blue { bold { "compile #{src}" } }
-    cmd = "cd #{project_id}/#{src} && export PERL5LIB=/usr/local/rle/lib/perl5 && pinto install -s #{config['stack']} -o 'q' -L #{local_lib} PINTO/`ls *.gz`"
+    cmd = "cd #{project_id}/#{src} && export PERL5LIB=/usr/local/rle/lib/perl5 && pinto install -s #{config['stack']} -L #{local_lib} -o 'q' PINTO/`ls *.gz`"
     puts cmd
     system(cmd) == true or raise "failed do cmd: #{cmd}"
 end
