@@ -1,5 +1,6 @@
 # 0.0.3
 - rely upon `pinto install` command not cpaminus when compiling modules
+- do not use local::lib directly
 
 # 0.0.2
 - `only` parameter added. Now it's possible to build distinct sources, selected by this parameter:
