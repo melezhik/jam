@@ -49,7 +49,7 @@ sources_list.each do |src|
     st = system(cmd) == true or  raise "failed do cmd: #{cmd}" 
 
 
-    cmd = "eval $(perl -Mlocal::lib=#{local_lib}) &&  cd #{project_id}/#{src} && rm -rf *.gz && rm -rf MANIFEST && perl Build.PL --quiet 1>/dev/null  && ./Build manifest --quiet 2>/dev/null 1>/dev/null  && ./Build dist --quiet 1>/dev/null"
+    cmd = "cd #{project_id}/#{src} && rm -rf *.gz && rm -rf MANIFEST && perl Build.PL --quiet 1>/dev/null 2>module_build.err.log  && ./Build manifest --quiet 2>/dev/null 1>/dev/null  && ./Build dist --quiet 1>/dev/null"
     system(cmd) == true or raise "failed do cmd: #{cmd}"
 
 #    cmd ="cd #{project_id}/#{src}/ && pinto list -s #{config['stack']}  -D `ls *.gz` --format %f | grep  `ls *.gz` -q"
