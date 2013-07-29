@@ -271,7 +271,6 @@ And also we have distributive with _ALL_ dependencies ready to use:
 
     hello-world-example/HelloWorldApp/trunk/HelloWorld-App-v0.1.0.tar.gz
     
-    
 
 
 
