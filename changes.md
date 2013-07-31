@@ -1,3 +1,6 @@
+# 0.0.5
+- now can install misc modules declared in "modules" list, it's very helfull, huh?
+
 # 0.0.4
 - reverted some chages and cleaned up output
 
