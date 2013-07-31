@@ -86,14 +86,14 @@ end
 
 
 if config.has_key? 'modules'
-    puts brown { bold {  "pulling / compiling misc modules" } }
+    puts dark { blue  { bold {  "pulling / compiling misc modules" } } }
     config['modules'].each do |m|
 
-	puts brown { bold {  "pull #{m}" } }
+	puts dark { magenta { bold {  "pull #{m}" } } }
 	cmd ="pinto pull -s #{config['stack']} -v #{m}"
         system(cmd) == true or raise "failed do cmd: #{cmd}"
         
-	puts green { bold { "compile #{m}" } }
+	puts dark { green { bold { "compile #{m}" } } }
 	cmd = "pinto install -s #{config['stack']} -l #{local_lib} -o 'q' #{m}"
 	system(cmd) == true or raise "failed do cmd: #{cmd}"
         
