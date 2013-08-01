@@ -1,5 +1,8 @@
 # 0.0.5
 - now can install misc modules declared in "modules" list, it's very helfull, huh?
+- `skip-misc` option added
+- added test as final step
+
 
 # 0.0.4
 - reverted some chages and cleaned up output
