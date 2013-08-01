@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+
+require 'sinatra'
+require 'bcat'
+
+set :bind, 'pinto.webdev.x'
+set :port, 9000
+
+get '/build/boomerang2' do
+  command = 'cd /home/pinto/jams &&  ~/jam/bin/pjam -p boomerang2 --no-color'
+  content_type :txt
+  IO.popen(command)
+end
+
+
+get '/list/boomerang2' do
+  command = %[pinto list -s boomerang2 --no-color]
+  content_type :txt
+  IO.popen(command)
+end
+
