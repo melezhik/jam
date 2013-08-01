@@ -7,16 +7,14 @@ set :bind, 'pinto.webdev.x'
 set :port, 9000
 
 get '/build/boomerang2' do
-  command = 'cd /home/pinto/jams &&  ~/jam/bin/pjam -p boomerang2 2>&1 | ansi2html --envelope'
-  content_type :txt
-  IO.popen(command)
+  command = 'cd /home/pinto/jams &&  ~/jam/bin/pjam -p boomerang2 --only app 2>&1 | ansi2html --envelope'
+  `#{command}`
 end
 
 
 get '/build/boomerang-banner-delivery' do
-  command = 'cd /home/pinto/jams &&  ~/jam/bin/pjam -p boomerang-banner-delivery 2>&1 | ansi2html --envelope'
-  content_type :txt
-  IO.popen(command)
+  command = 'cd /home/pinto/jams &&  ~/jam/bin/pjam -p boomerang-banner-delivery  --only app 2>&1 | ansi2html --envelope'
+  `#{command}`
 end
 
 get '/list/boomerang2' do
