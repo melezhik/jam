@@ -2,21 +2,25 @@
 
 
 require 'sinatra'
-require 'bcat'
 
 set :bind, 'pinto.webdev.x'
 set :port, 9000
 
 get '/build/boomerang2' do
-  command = 'cd /home/pinto/jams &&  ~/jam/bin/pjam -p boomerang2 --no-color'
+  command = 'cd /home/pinto/jams &&  ~/jam/bin/pjam -p boomerang2 2>&1 | ansi2html --envelope'
   content_type :txt
   IO.popen(command)
 end
 
 
-get '/list/boomerang2' do
-  command = %[pinto list -s boomerang2 --no-color]
+get '/build/boomerang-banner-delivery' do
+  command = 'cd /home/pinto/jams &&  ~/jam/bin/pjam -p boomerang-banner-delivery 2>&1 | ansi2html --envelope'
   content_type :txt
   IO.popen(command)
+end
+
+get '/list/boomerang2' do
+  command = %[pinto list -s boomerang2  2>&1 | ansi2html --envelope ]
+  `#{command}`
 end
 
