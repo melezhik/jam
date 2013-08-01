@@ -145,6 +145,6 @@ else
     puts cyan { bold {  "testing #{config['application']}" } }
 end 
 
-cmd = "pinto install -s #{config['stack']} -l #{local_lib} -o 'test-only' PINTO/`cat #{project_id}/current.txt`"
+cmd = "cd #{project_id} && pinto install -s #{config['stack']} -l #{local_lib} -o 'test-only' PINTO/`cat current.txt`"
 system(cmd) == true or raise "failed do cmd: #{cmd}"
 
