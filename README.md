@@ -3,7 +3,7 @@
 Smart [pinto](https://github.com/thaljef/Pinto) glue. 
 
 Pjam is glue between [pinto](http://search.cpan.org/perldoc?Pinto) and your [scm](https://en.wikipedia.org/wiki/Revision_control). 
-Pjam is wrapper around pinto client, allowing to to build, distribute [perl](http://www.perl.org/) applications from
+Pjam is a wrapper around pinto client allowing you to to build, distribute [perl](http://www.perl.org/) applications from
 source code.
 
 
