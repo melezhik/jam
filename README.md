@@ -17,7 +17,7 @@ PINTO_EDITOR should be set as shown in example.
 
 # conventions and limitations
 - sources should be strored in subversion SCM - I'd like to abolish this eventually, to support none SCM sources and
-support more other SCMs.
+may be to support other SCMs.
 
 # usage
 
