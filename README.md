@@ -1,113 +1,69 @@
-pjam
-===
+# pjam
+
 Smart [pinto](https://github.com/thaljef/Pinto) glue. 
 
 pjam is glue between pinto and your [scm](https://en.wikipedia.org/wiki/Revision_control). See an example further on how one can use pjam and pinto to build [perl](http://www.perl.org/) applications.
 
 
-prerequisites
-===
+# prerequisites
 pinto client should be installed, pjam should be run on the same environment as pinto does. PINTO_REPOSITORY_ROOT and
 PINTO_EDITOR should be set as shown in example.
 
 
-example
-===
+# installation
 
-First of all  checkout and install pjam from git repository:
 
     gem install pjam --pre
     
 
-For the sake of simplicity let's take a simple [Module::Build](http://search.cpan.org/perldoc?Module%3A%3ABuild) based project, we gonna build with pinto.
-cat Build.PL:
-    
-         
-    #!/usr/bin/perl
-    use Module::Build;
-    use strict;
-    my $build = Module::Build->new(
-        module_name       => "HelloWorld::App",
-        dist_author       => 'Alexey Melezhik / melezhik@gmail.com',
-        license          => 'perl',
-        configure_requires => { 'Module::Build' => '0' },
-        requires         => {
-          'version'    => '0',
-          'DBD::mysql' => '>= 4.0.21',
-          'DBI' => '0',
-        },
-    
-        dist_abstract => 'Hello World Application',
-    );
+# conventions and limitations
+- sources should be strored in subversion SCM
 
-    $build->create_build_script();
-    
-    
-  
-As you can see there are some prerequisites - version, DBD::mysql, DBI - we will let pinto to take care about all of them.
-Also, let's say we store our project source code in our favourite scm, for the example given it is [SVN](http://subversion.tigris.org), 
-pjam now in prototype stage, but in the future more scms may be supported, of-course I like [git](http://git-scm.com/) too :))
+# usage
 
-    mkdir pjam-projects
-    cd pjam-projects
-    mkdir hello-world-example
-    cd  hello-world-example
-    svn co http://your-svn-repository/apps/HelloWorldApp/trunk HelloWorldApp/trunk
-    ls -l HelloWorldApp/trunk
-    -rw-r--r-- 1 pinto pinto     1792 Jul  9 12:38 Build.PL
-    drwxr-xr-x 4 pinto pinto     4096 Jul  8 15:54 lib
+Full explanation can be found in [wiki pages](https://github.com/melezhik/jam/wiki/Inroduction-to-pjam). This is brief
+introduction. 
 
+Let's say we have perl project and we want to create full distribution of them, ready to deploy, holding all the dependencies.
+For the sake of simplicity, we in the example given there are 2 components of our project - application and library, in real life
+we of course have much more elements.
 
-pjam is directory based tool, it mean you should point a directory to to make it work:
+    pinto@pinto:~/jam/example/hello-world-example$ ls -1
+    HelloWorldApp
+    HelloWorldLib
 
-    pjam -p ./hello-world-example
-    
-Okay, I had it almost right, but I "forget" about some tiny configuration file for pjam may glue things correctly. This is
-pjam json file. cat ./hello-world-example/pjam.json
+Both directories holds source code follows [cpan distribution](http://www.dagolden.com/index.php/1173/what-tools-should-you-use-to-create-a-cpan-distribution/)
+format.
+First of all let create pjam configuration file which describe the process of compiling and distribution.
+cat ./hello-world-example/pjam.json
 
     {
         "stack" : "hello-world-example-stack",
-        "application": "HelloWorldApp/trunk",
+        "application": "HelloWorldApp",
         "sources": [
-            "HelloWorldApp/trunk",
+            "HelloWorldApp",
+            "HelloWorldLib"
         ]
     }
 
-The configuration data are pretty self-explanatory. But let's clarify some of parameters. Sources - is array of directories where 
-source code comes from. Right now there is only one source - application source code, but there might be more, what if we want
-more libraries on which our application code may depend on ? It's easy to add one: 
+The configuration data are pretty self-explanatory. But let's clarify some of parameters. 
 
+- `sources` - is array of directories where source code ( parts to get build and compiled together ) resides. 
+It is necessarily to say, that _elements in `sources` are processed in order_, if element "A" is depended 
+on other elemet "B", than "A" should be followed by "B" in `sources` list.
+- an `application` parameter points to the `application source directory' - the one that will be choosen to make distibutive from.
+So all other elements in `sources` array may be treated as `exeternal' dependencies. 
+`application source directory' should be also in the `sources` list.
 
-    svn co http://your-svn-repository/apps/HelloWorldLib/tags/version-0.0.2 HelloWorldLib/latest-version
-   
-Now we need to add new source to pjam json file. cat ./hello-world-example/pjam.json
-
-    {
-        "stack" : "hello-world-example-stack",
-        "application": "HelloWorldApp/trunk",
-        "sources": [
-            "HelloWorldLib/latest-version",
-            "HelloWorldApp/trunk"
-        ]
-    }
-
-
-It is necessarily to say, that _elements in "sources" are processed in order_, if one source code "A" is depended on other "B", 
-than "A" should be followed by "B" in "sources" list.
-
-
-Application parameter points to the directory that will be choosen to make distibutive from. 
-After all the distribuitve will hold all dependencies taken from "sources" list + source code in application "directory"
-
-And finally the stack parameter points certain pinto stack when adding/pulling dependencies to pinto. Of-course
-we should create it before:
+- And finally the `stack` parameter points certain pinto stack to add dependencies to. 
+Of course we should create it before:
 
     pinto new hello-world-example-stack
 
-Now, let's try our smart pjam glue to build our application:
+Now it's time to give a try to pjam to create distributive:
 
     export PINTO_EDITOR=cat
-    export PINTO_REPOSITORY_ROOT=/home/pinto/repo2/
+    export PINTO_REPOSITORY_ROOT=/home/pinto/repo/
 
     pjam -p ./hello-world-example
     
@@ -118,7 +74,7 @@ Now, let's try our smart pjam glue to build our application:
     
     WARNING: Possible missing or corrupt 'MANIFEST' file.
     Nothing to enter for 'provides' field in metafile.
-    add HelloWorldLib/latest-version to pinto for the first time
+    add HelloWorldLib/ to pinto for the first time
     Registering PINTO/HelloWorld-Lib-v0.0.2.tar.gz on stack hello-world-example-stack
     Descending into prerequisites for PINTO/HelloWorld-Lib-v0.0.2.tar.gz
     Add PINTO/HelloWorld-Lib-v0.0.2.tar.gz
@@ -235,7 +191,7 @@ Now, let's try our smart pjam glue to build our application:
     
     WARNING: Possible missing or corrupt 'MANIFEST' file.
     Nothing to enter for 'provides' field in metafile.
-    add HelloWorldApp/trunk to pinto for the first time
+    add HelloWorldApp/ to pinto for the first time
     Registering PINTO/HelloWorld-App-v0.1.0.tar.gz on stack hello-world-example-stack
     Descending into prerequisites for PINTO/HelloWorld-App-v0.1.0.tar.gz
     Add PINTO/HelloWorld-App-v0.1.0.tar.gz
@@ -251,15 +207,15 @@ Now, let's try our smart pjam glue to build our application:
     #
     # +[rl-] HelloWorld::App                                v0.1.0 PINTO/HelloWorld-App-v0.1.0.tar.gz
     
-    compile HelloWorldLib/latest-version
+    compile HelloWorldLib/
     Successfully installed DBI-1.627
     Successfully installed DBD-mysql-4.023
     Successfully installed HelloWorld-Lib-v0.0.2
     3 distributions installed
-    compile HelloWorldApp/trunk
+    compile HelloWorldApp/
     Successfully installed HelloWorld-App-v0.1.0
     1 distribution installed
-    make distributive from HelloWorldApp/trunk
+    make distributive from HelloWorldApp/
         
 
 
@@ -269,7 +225,8 @@ After all we have all our stuff get pulled to pinto repository:
      
 And also we have distributive with _ALL_ dependencies ready to use:
 
-    hello-world-example/HelloWorldApp/trunk/HelloWorld-App-v0.1.0.tar.gz
+    hello-world-example/HelloWorldApp/HelloWorld-App-v0.1.0.tar.gz
+    
     
 
 
