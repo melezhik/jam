@@ -29,7 +29,7 @@ Let's say we have perl project and we want to create distribution ready to deplo
 For the sake of simplicity there are only 2 components of our project in the given example given  - application and library. 
 In real life there are of course have much more elements.
 
-    pinto@pinto:~/jam/example/hello-world-example$ ls -1
+    $ ls -1
     HelloWorldApp/
     HelloWorldLib/
 
@@ -37,7 +37,10 @@ Both directories holds source code follows [cpan distribution](http://www.dagold
 format.
 
 First of all let create pjam configuration file which describe the process of compiling and distribution.
-cat ./hello-world-example/pjam.json
+
+    
+
+    $ cat ./hello-world-example/pjam.json
 
     {
         "stack" : "hello-world-example-stack",
@@ -53,21 +56,23 @@ The configuration file is pretty self-explanatory:
 - `sources` - is array of directories where source code ( parts to get build and compiled together ) resides. 
 It is necessarily to say, that elements in `sources` are processed in order, if element "A" is depended 
 on other elemet "B", than "A" should be followed by "B" in `sources` list.
-- an `application` parameter points to the `application source directory` - the one that will be choosen to make distibutive from.
+- an `application` parameter points to the _application source directory_ - the one that will be choosen to make distibutive from.
 So all other elements in `sources` array may be treated as exeternal dependencies. 
-`application source directory` should be also in the `sources` list.
+application source directory should be also in the `sources` list.
 
 - And finally the `stack` parameter points certain pinto stack to add dependencies to. 
 Of course we should create first:
 
-    pinto new hello-world-example-stack
 
+    $ pinto new hello-world-example-stack
+             
+    
 Now it's time to give a try to pjam to create distributive ... and it's very easy!
 
-    export PINTO_EDITOR=cat
-    export PINTO_REPOSITORY_ROOT=/home/pinto/repo/
+    $ export PINTO_EDITOR=cat
+    $ export PINTO_REPOSITORY_ROOT=/home/pinto/repo/
 
-    pjam -p ./hello-world-example
+    $ pjam -p ./hello-world-example
     
     At revision 62676.
     Attempting to create directory /home/pinto/pjam-projects/hello-world-example/cpanlib
@@ -223,7 +228,7 @@ Now it's time to give a try to pjam to create distributive ... and it's very eas
 
 After all we have all our stuff get pulled to pinto repository:
 
-     pinto list -s hello-world-example-stack
+     $ pinto list -s hello-world-example-stack
      
 And also we have distributive with _ALL_ dependencies ready to use:
 
