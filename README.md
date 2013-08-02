@@ -12,7 +12,6 @@ PINTO_EDITOR should be set as shown in example.
 
 # installation
 
-
     gem install pjam --pre
     
 
@@ -60,18 +59,17 @@ on other elemet "B", than "A" should be followed by "B" in `sources` list.
 So all other elements in `sources` array may be treated as exeternal dependencies. 
 application source directory should be also in the `sources` list.
 
-- And finally the `stack` parameter points certain pinto stack to add dependencies to. 
-Of course we should create first:
+- And finally the `stack` parameter points certain pinto stack to add dependencies to. Of course we should create first:
+
 
     $ pinto new hello-world-example-stack
-    
     
 Now it's time to give a try to pjam to create distributive ... and it's very easy!
 
     $ export PINTO_EDITOR=cat
     $ export PINTO_REPOSITORY_ROOT=/home/pinto/repo/
-
     $ pjam -p ./hello-world-example
+    
     
     At revision 62676.
     Attempting to create directory /home/pinto/pjam-projects/hello-world-example/cpanlib
