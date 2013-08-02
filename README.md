@@ -17,23 +17,25 @@ PINTO_EDITOR should be set as shown in example.
     
 
 # conventions and limitations
-- sources should be strored in subversion SCM
+- sources should be strored in subversion SCM - I'd like to abolish this eventually, to support none SCM sources and
+support more other SCMs.
 
 # usage
 
-Full explanation can be found in [wiki pages](https://github.com/melezhik/jam/wiki/Inroduction-to-pjam). This is brief
-introduction. 
+Full explanation can be found in [wiki pages](https://github.com/melezhik/jam/wiki/Inroduction-to-pjam). 
+This is brief introduction. 
 
-Let's say we have perl project and we want to create full distribution of them, ready to deploy, holding all the dependencies.
-For the sake of simplicity, we in the example given there are 2 components of our project - application and library, in real life
-we of course have much more elements.
+Let's say we have perl project and we want to create distribution ready to deploy, holding all the dependencies.
+For the sake of simplicity there are only 2 components of our project in the given example given  - application and library. 
+In real life there are of course have much more elements.
 
     pinto@pinto:~/jam/example/hello-world-example$ ls -1
-    HelloWorldApp
-    HelloWorldLib
+    HelloWorldApp/
+    HelloWorldLib/
 
 Both directories holds source code follows [cpan distribution](http://www.dagolden.com/index.php/1173/what-tools-should-you-use-to-create-a-cpan-distribution/)
 format.
+
 First of all let create pjam configuration file which describe the process of compiling and distribution.
 cat ./hello-world-example/pjam.json
 
@@ -46,7 +48,7 @@ cat ./hello-world-example/pjam.json
         ]
     }
 
-The configuration data are pretty self-explanatory. But let's clarify some of parameters. 
+The configuration file is pretty self-explanatory:
 
 - `sources` - is array of directories where source code ( parts to get build and compiled together ) resides. 
 It is necessarily to say, that _elements in `sources` are processed in order_, if element "A" is depended 
@@ -56,11 +58,11 @@ So all other elements in `sources` array may be treated as `exeternal' dependenc
 `application source directory' should be also in the `sources` list.
 
 - And finally the `stack` parameter points certain pinto stack to add dependencies to. 
-Of course we should create it before:
+Of course we should create first:
 
     pinto new hello-world-example-stack
 
-Now it's time to give a try to pjam to create distributive:
+Now it's time to give a try to pjam to create distributive ... and it's very easy!
 
     export PINTO_EDITOR=cat
     export PINTO_REPOSITORY_ROOT=/home/pinto/repo/
