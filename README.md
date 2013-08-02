@@ -53,7 +53,7 @@ The configuration file is pretty self-explanatory:
 - `sources` - is array of directories where source code ( parts to get build and compiled together ) resides. 
 It is necessarily to say, that _elements in `sources` are processed in order_, if element "A" is depended 
 on other elemet "B", than "A" should be followed by "B" in `sources` list.
-- an `application` parameter points to the `application source directory' - the one that will be choosen to make distibutive from.
+- an `application` parameter points to the `application source directory` - the one that will be choosen to make distibutive from.
 So all other elements in `sources` array may be treated as `exeternal' dependencies. 
 `application source directory' should be also in the `sources` list.
 
