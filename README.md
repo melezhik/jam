@@ -54,9 +54,9 @@ The configuration file is pretty self-explanatory:
 
 - `sources` - is array of directories where source code ( parts to get built and compiled together ) resides. 
 It is necessarily to say, that _elements in `sources` are processed in order_, if element "A" is depended 
-on other elemet "B", than "A" should be followed by "B" in `sources` list.
-- an `application` parameter points to the _application source directory_ - the one to make distibution from,
-so all other elements in `sources` array may be treated as exeternal dependencies for _application_ element 
+on other element "B", than element "A" should be followed by element "B" in `sources` list.
+- an `application` parameter points to the _application source directory_ - the one to make distribution from,
+so all other elements in `sources` array may be treated as external dependencies for _application_ element 
 and application source directory should be also in the `sources` list.
 
 - And finally the `stack` parameter points certain pinto stack to add dependencies to. 
