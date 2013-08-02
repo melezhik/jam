@@ -235,9 +235,9 @@ And also we have distributive with _ALL_ dependencies ready to use:
     
 
 # pjam interface
-description comming soon
+description coming soon
 
 # pjam configuration file specification
-description comming soon
+description coming soon
 
 
