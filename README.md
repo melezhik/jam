@@ -2,7 +2,7 @@
 
 Smart [pinto](https://github.com/thaljef/Pinto) glue. 
 
-pjam is glue between pinto and your [scm](https://en.wikipedia.org/wiki/Revision_control). See an example further on how one can use pjam and pinto to build [perl](http://www.perl.org/) applications.
+pjam is glue between [pinto](http://search.cpan.org/perldoc?Pinto) and your [scm](https://en.wikipedia.org/wiki/Revision_control). See an example further on how one can use pjam and pinto to build [perl](http://www.perl.org/) applications.
 
 
 # prerequisites
