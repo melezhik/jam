@@ -2,7 +2,9 @@
 
 Smart [pinto](https://github.com/thaljef/Pinto) glue. 
 
-pjam is glue between pinto and your [scm](https://en.wikipedia.org/wiki/Revision_control). See an example further on how one can use pjam and pinto to build [perl](http://www.perl.org/) applications.
+Pjam is glue between [pinto](http://search.cpan.org/perldoc?Pinto) and your [scm](https://en.wikipedia.org/wiki/Revision_control). 
+Pjam is a wrapper around pinto client allowing you to to build, distribute [perl](http://www.perl.org/) applications from
+source code.
 
 
 # prerequisites
@@ -17,7 +19,7 @@ PINTO_EDITOR should be set as shown in example.
 
 # conventions and limitations
 - sources should be strored in subversion SCM - I'd like to abolish this eventually, to support none SCM sources and
-support more other SCMs.
+may be to support other SCMs.
 
 # usage
 
@@ -25,17 +27,17 @@ Full explanation can be found in [wiki pages](https://github.com/melezhik/jam/wi
 This is brief introduction. 
 
 Let's say we have perl project and we want to create distribution ready to deploy, holding all the dependencies.
-For the sake of simplicity there are only 2 components of our project in the given example given  - application and library. 
-In real life there are of course have much more elements.
+In the given example there are only 2 components of our project - an 'application' and a 'library'. 
+In real life may be much more elements.
 
     $ ls -1
     HelloWorldApp/
     HelloWorldLib/
 
 Both directories holds source code follows [cpan distribution](http://www.dagolden.com/index.php/1173/what-tools-should-you-use-to-create-a-cpan-distribution/)
-format.
+format and stored under subversion ( see the 'conventions and limitations' section )
 
-First of all let create pjam configuration file which describe the process of compiling and distribution.
+First of all let's create pjam configuration file which describe the process of compiling and distribution.
 
     
 
@@ -52,14 +54,15 @@ First of all let create pjam configuration file which describe the process of co
 
 The configuration file is pretty self-explanatory:
 
-- `sources` - is array of directories where source code ( parts to get build and compiled together ) resides. 
+- `sources` - is array of directories where source code ( parts to get built and compiled together ) resides. 
 It is necessarily to say, that _elements in `sources` are processed in order_, if element "A" is depended 
-on other elemet "B", than "A" should be followed by "B" in `sources` list.
-- an `application` parameter points to the _application source directory_ - the one that will be choosen to make distibutive from.
-So all other elements in `sources` array may be treated as exeternal dependencies. 
-application source directory should be also in the `sources` list.
+on other element "B", than element "A" should be followed by element "B" in `sources` list.
+- an `application` parameter points to the _application source directory_ - the one to make distribution from,
+so all other elements in `sources` array may be treated as external dependencies for _application_ element 
+and application source directory should be also in the `sources` list.
 
-- And finally the `stack` parameter points certain pinto stack to add dependencies to. Of course we should create first:
+- And finally the `stack` parameter points certain pinto stack to add dependencies to. 
+Of course we should create it first:
 
 
     $ pinto new hello-world-example-stack
@@ -233,5 +236,10 @@ And also we have distributive with _ALL_ dependencies ready to use:
     
     
 
+# pjam interface
+description coming soon
+
+# pjam configuration file specification
+description coming soon
 
 
