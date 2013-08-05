@@ -1,3 +1,6 @@
+# 0.0.6
+pjamd - web interface to pjam
+
 # 0.0.5
 - now can install misc modules declared in "modules" list, it's very helfull, huh?
 - `skip-misc` option added
