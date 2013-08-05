@@ -1,5 +1,8 @@
+# 0.0.7
+- pjamd server now has config
+
 # 0.0.6
-pjamd - web interface to pjam
+- pjamd - web interface to pjam
 
 # 0.0.5
 - now can install misc modules declared in "modules" list, it's very helfull, huh?
