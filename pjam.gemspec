@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "term-ansicolor"
   s.add_runtime_dependency "trollop"
   s.add_runtime_dependency "sinatra"
-  s.add_runtime_dependecy  "sinatra-contrib"    
+  s.add_runtime_dependency  "sinatra-contrib"    
   s.homepage = 'https://github.com/melezhik/jam'
 
 end
