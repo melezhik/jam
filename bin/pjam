@@ -41,6 +41,30 @@ end
 
 config = JSON.parse(File.read("#{project_id}/pjam.json"))
 
+misc_modules =  []
+
+if config.has_key? 'modules' and opts[:no_misc] == false
+
+    if opts[:no_color] == true
+	puts "pulling / compiling misc modules"
+    else
+	puts dark { blue  { bold {  "pulling / compiling misc modules" } } }
+    end
+    
+    config['modules'].each do |m|
+
+	if opts[:no_color] == true
+	    puts "pull #{m}"
+	else
+	    puts dark { magenta { bold {  "pull #{m}" } } }
+	end
+	cmd ="pinto pull -s #{config['stack']} -v #{m} #{color_flag}"
+        system(cmd) == true or raise "failed do cmd: #{cmd}"
+        
+        misc_modules << m
+
+    end
+end
 
 sources_list = []
 if opts[:only].nil?
@@ -91,6 +115,19 @@ sources_list.each do |src|
 end
 
 
+misc_modules.each do |m|
+
+    if opts[:no_color] == true
+	puts "compile #{m}"
+    else
+	puts green { bold { "compile #{m}" } }
+    end
+    
+    cmd = "pinto install -s #{config['stack']} -l #{local_lib} -o 'q' #{m} #{color_flag}"
+    system(cmd) == true or raise "failed do cmd: #{cmd}"
+end
+
+
 compile_list.each do |d|
 
     if opts[:no_color] == true
@@ -101,37 +138,6 @@ compile_list.each do |d|
     
     cmd = "pinto install -s #{config['stack']} -l #{local_lib} -o 'q' PINTO/#{d} #{color_flag}"
     system(cmd) == true or raise "failed do cmd: #{cmd}"
-end
-
-
-if config.has_key? 'modules' && opts[:no_misc] == false
-
-    if opts[:no_color] == true
-	puts "pulling / compiling misc modules"
-    else
-	puts dark { blue  { bold {  "pulling / compiling misc modules" } } }
-    end
-    
-    config['modules'].each do |m|
-
-	if opts[:no_color] == true
-	    puts "pull #{m}"
-	else
-	    puts dark { magenta { bold {  "pull #{m}" } } }
-	end
-	cmd ="pinto pull -s #{config['stack']} -v #{m} #{color_flag}"
-        system(cmd) == true or raise "failed do cmd: #{cmd}"
-        
-        if opts[:no_color] == true
-    	    puts "compile #{m}"
-        else
-	    puts dark { green { bold { "compile #{m}" } } }
-	end  
-	  
-	cmd = "pinto install -s #{config['stack']} -l #{local_lib} -o 'q' #{m} #{color_flag}"
-	system(cmd) == true or raise "failed do cmd: #{cmd}"
-        
-    end
 end
 
 

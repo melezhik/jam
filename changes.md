@@ -1,5 +1,6 @@
 # 0.0.7
 - pjamd server now has config
+- modules are proccessed first
 
 # 0.0.6
 - pjamd - web interface to pjam
