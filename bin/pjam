@@ -104,7 +104,7 @@ sources_list.each do |src|
 	cmd ="cd #{project_id}/#{src} && pinto delete -v PINTO/#{distro_name} #{color_flag}"
         system(cmd) == true
 
-	cmd ="cd #{project_id}/#{src} && pinto add -x AdriverCore::AdRiverCookie -s #{config['stack']} -v #{distro_name} #{color_flag}"
+	cmd ="cd #{project_id}/#{src} && pinto add  -s #{config['stack']} -v #{distro_name} #{color_flag}"
         system(cmd) == true or raise "failed do cmd: #{cmd}"
 
         compile_list << distro_name
