@@ -1,3 +1,9 @@
+# 0.0.9
+- runs pjam server under thin
+
+# 0.0.8
+- a tiny fix
+
 # 0.0.7
 - pjamd server now has config
 - modules are proccessed first

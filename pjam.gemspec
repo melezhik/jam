@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
 
   s.name        = 'pjam'
-  s.version     = '0.0.7.pre'
+  s.version     = '0.0.9.pre'
   s.date        = '2013-07-23'
   s.summary     = "smart pinto glue"
   s.description = "Smart pinto glue - jam between source code and pinto"
@@ -16,7 +16,9 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "term-ansicolor"
   s.add_runtime_dependency "trollop"
   s.add_runtime_dependency "sinatra"
-  s.add_runtime_dependency  "sinatra-contrib"    
+  s.add_runtime_dependency  "sinatra-contrib"
+  s.add_runtime_dependency  "thin"
+  
   s.homepage = 'https://github.com/melezhik/jam'
 
 end
