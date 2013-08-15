@@ -1,3 +1,6 @@
+# 0.0.10
+- fixing typos in help info and wiki pages
+
 # 0.0.9
 - runs pjam server under thin
 
