@@ -29,12 +29,12 @@ Let's say we have perl project and we want to create distribution ready to deplo
 In the given example there are only 2 components of our project - an 'application' and a 'library'. 
 In real life may be much more elements.
 
-    $ ls -1
+    $ ls -1 ./hello-world-example/
     HelloWorldApp/
     HelloWorldLib/
 
-Both directories holds source code follows [cpan distribution](http://www.dagolden.com/index.php/1173/what-tools-should-you-use-to-create-a-cpan-distribution/)
-format and stored under subversion ( see the 'conventions and limitations' section )
+Both directories hold source code which follows [cpan distribution](http://www.dagolden.com/index.php/1173/what-tools-should-you-use-to-create-a-cpan-distribution/)
+format and is stored under subversion SCM ( see the 'conventions and limitations' section )
 
 First of all let's create pjam configuration file which describe the process of compiling and distribution.
 
