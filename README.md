@@ -3,13 +3,13 @@
 Smart [pinto](https://github.com/thaljef/Pinto) glue. 
 
 Pjam is glue between [pinto](http://search.cpan.org/perldoc?Pinto) and your [scm](https://en.wikipedia.org/wiki/Revision_control). 
-Pjam is a wrapper around pinto client allowing you to to build, distribute [perl](http://www.perl.org/) applications from
-source code.
+in other words pjam is a wrapper around pinto client to create distribution archive of [perl](http://www.perl.org/) applications from
+source code using pinto.
 
 
 # prerequisites
-- pinto client should be installed, pjam should be run on the same environment as pinto does. 
-- PINTO_REPOSITORY_ROOT and INTO_EDITOR should be set as shown in example.
+- pinto client should be installed and pjam should run on the same environment as pinto does. 
+- PINTO_REPOSITORY_ROOT and INTO_EDITOR should be set ( see the example of usage further ).
 
 
 # installation
@@ -17,16 +17,16 @@ source code.
     gem install pjam --pre
     
 # conventions and limitations
-- sources should be strored in subversion SCM - I'd like to abolish this eventually, to support none SCM sources and
+- sources should be stored in subversion SCM - I'd like to abolish this eventually, to support none SCM sources and
 may be to support other SCMs.
 
-# usage
+# example of usage
 
-Full explanation can be found in [wiki pages](https://github.com/melezhik/jam/wiki/Inroduction-to-pjam). 
+Full explanation can be found in [wiki pages](https://github.com/melezhik/jam/wiki/Introduction-to-pjam). 
 This is brief introduction. 
 
-First of all pjam should be told project root directory, holding all necessary data to work with, so this is
-the directory holdig all source codes and pjam configuration file:
+First of all pjam should be told _project root directory_, holding all necessary data to work with, so this is
+the directory to contain all source codes and pjam configuration file:
 
 
     $ ls -1 ./hello-world-example/
@@ -34,11 +34,11 @@ the directory holdig all source codes and pjam configuration file:
     HelloWorldLib/
     pjam.json
     
-In this exmaple there are only 2 parts (source codes) of our project - an 'application' and a 'library'. 
-In real life may be much more elements. Both directories hold source code which follows [cpan distribution](http://www.dagolden.com/index.php/1173/what-tools-should-you-use-to-create-a-cpan-distribution/)
-format and is stored under subversion SCM ( see the 'conventions and limitations' section ). 
+In this example there are only 2 parts (source codes) of our project - an 'application' and a 'library'. 
+In real life may be much more sub elements. Both directories hold source code which should  follow [cpan distribution](http://www.dagolden.com/index.php/1173/what-tools-should-you-use-to-create-a-cpan-distribution/)
+format and be stored under subversion SCM ( see the 'conventions and limitations' section ). 
 
-And then pjam configuration file which describe the process of compiling and distribution.
+And then pjam configuration file describes the process of creation of distribution archive.
 
 
     $ cat ./hello-world-example/pjam.json
@@ -67,7 +67,7 @@ Of course we should create it first:
 
     $ pinto new hello-world-example-stack
     
-Now it's time to give a try to pjam to create distributive for our project, this may be done by one command:
+Now it's time to give a try to pjam to create distribution archive of our project, this may be done by single command:
 
     $ export PINTO_EDITOR=cat
     $ export PINTO_REPOSITORY_ROOT=/home/pinto/repo/
@@ -230,7 +230,7 @@ After all we have all our stuff get pulled to pinto repository:
 
      $ pinto list -s hello-world-example-stack
      
-And also we have distributive with _ALL_ dependencies ready to use:
+And also we have distributive with _ALL_ dependencies inside ready to deploy:
 
     hello-world-example/HelloWorldApp/HelloWorld-App-v0.1.0.tar.gz
     
@@ -238,19 +238,19 @@ And also we have distributive with _ALL_ dependencies ready to use:
 
 # pjam interface
 
-Main usage, build distributive.
+Main usage, make distribution archive:
 
     pjam -p <project> <options>
 
-`project` - path to project root directory (should contant pjam.json file and sub directories with sources)  
+`project` - path to _project root directory_ (should contain pjam.json file and sub directories with sources)  
 
-Options.
+Options:
 
-- `--only source-one-dir,source-two-dir,...`  only build given source(s). multiple sources are separated by comma.
-- `--no-misc` - do not build miscellaneous prerequisites given by `modules` section in pjam.json file
-- `--skip-pinto` - skip pinto phase, only do compile phase, usefull when prerequisites  already in pinto and you only
-want to rebuild distibutive 
-- `--no-color` - do not colorize output
+- `--only source-one-dir,source-two-dir,...`  only process given source(s). multiple sources are separated by comma.
+- `--no-misc` - do not add miscellaneous prerequisites given by `modules` section in pjam.json file
+- `--skip-pinto` - skip pinto phase, only do distribution phase, useful when prerequisites  already in pinto stack and you only
+want to recreate distribution archive
+- `--no-color` - do not colourize output
 - `--help` - print help info
 - `--version` - print pjam version
 
@@ -270,11 +270,11 @@ want to rebuild distibutive
         ]
     }
 
-- `stack` - name of pinto stack all prerequisites will be add to
-- `application` - name of sub directory in project root directory holding source code for 'application' - the one to make distribution from
+- `stack` - name of pinto stack where all prerequisites to add to
+- `application` - name of sub directory in project root directory holding source code for _application_ - the one to make distribution archive from
 - `sources` - is array of sub directories in project root directory  where all source codes reside. It may be treated as prerequisites 
-to get pulled to pinto stack and being added to application distibutive 
+to being added to pinto stack (pinto phase) and then to distribution archive (distribution phase)
 - `modules` - is array of miscellaneous prerequisites, should follow `pinto pull` command format. It also may be treated as prerequisites 
-to get pulled to pinto stack and being added to application distibutive
+to get pulled to pinto stack (pinto phase) and being added to distribution archive (distribution phase)
 
 
