@@ -18,10 +18,10 @@ where [options] are:
 EOS
 
     opt :p, "path to project", :type => :string
-    opt :skip_pinto, "skip pinto phase, only do compile phase", :default => false
-    opt :no_color, "do not colorize output", :default => false
-    opt :no_misc, "do not build miscellaneous prerequisites", :default => false
-    opt :only, "only build given source(s). multiple sources are separated by coma", :type => :string, :default => nil
+    opt :skip_pinto, "skip pinto phase, only do distibution phase", :default => false
+    opt :no_color, "do not colour output", :default => false
+    opt :no_misc, "do not add miscellaneous prerequisites", :default => false
+    opt :only, "only add given source(s). multiple sources are separated by comma", :type => :string, :default => nil
 end
 
 
