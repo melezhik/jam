@@ -8,15 +8,14 @@ source code.
 
 
 # prerequisites
-pinto client should be installed, pjam should be run on the same environment as pinto does. PINTO_REPOSITORY_ROOT and
-PINTO_EDITOR should be set as shown in example.
+- pinto client should be installed, pjam should be run on the same environment as pinto does. 
+- PINTO_REPOSITORY_ROOT and INTO_EDITOR should be set as shown in example.
 
 
 # installation
 
     gem install pjam --pre
     
-
 # conventions and limitations
 - sources should be strored in subversion SCM - I'd like to abolish this eventually, to support none SCM sources and
 may be to support other SCMs.
@@ -237,7 +236,23 @@ And also we have distributive with _ALL_ dependencies ready to use:
     
 
 # pjam interface
-description coming soon
+
+## Main usage, build distributive
+
+    pjam -p <project> <options>
+
+`project` - path to project root directory (should contant pjam.json file and sub directories with sources)  
+
+## options 
+
+- `--only source-one-dir,source-two-dir,...`  only build given source(s). multiple sources are separated by coma.
+- `--no-misc` - do not build miscellaneous prerequisites given by `modules` section in pjam.json file
+- `--skip-pinto` - skip pinto phase, only do compile phase, usefull when prerequisites  already in pinto and you only
+want to rebuild distibutive 
+- `--no-color` - do not colorize output
+- `--help` - print help info
+- `--version` - print pjam version
+
 
 # pjam configuration file specification
 description coming soon
