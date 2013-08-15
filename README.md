@@ -245,7 +245,7 @@ Main usage, build distributive.
 
 Options.
 
-- `--only source-one-dir,source-two-dir,...`  only build given source(s). multiple sources are separated by coma.
+- `--only source-one-dir,source-two-dir,...`  only build given source(s). multiple sources are separated by comma.
 - `--no-misc` - do not build miscellaneous prerequisites given by `modules` section in pjam.json file
 - `--skip-pinto` - skip pinto phase, only do compile phase, usefull when prerequisites  already in pinto and you only
 want to rebuild distibutive 
