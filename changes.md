@@ -1,3 +1,6 @@
+# 0.0.11
+- fix ruby gem description
+
 # 0.0.10
 - fixing typos in help info and wiki pages
 
