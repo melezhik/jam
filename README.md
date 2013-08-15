@@ -250,7 +250,7 @@ Options:
 - `--no-misc` - do not add miscellaneous prerequisites given by `modules` section in pjam.json file
 - `--skip-pinto` - skip pinto phase, only do distribution phase, useful when prerequisites  already in pinto stack and you only
 want to recreate distribution archive
-- `--no-color` - do not colourize output
+- `--no-color` - do not colour output
 - `--help` - print help info
 - `--version` - print pjam version
 
