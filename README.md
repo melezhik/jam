@@ -237,13 +237,13 @@ And also we have distributive with _ALL_ dependencies ready to use:
 
 # pjam interface
 
-## Main usage, build distributive
+Main usage, build distributive.
 
     pjam -p <project> <options>
 
 `project` - path to project root directory (should contant pjam.json file and sub directories with sources)  
 
-## options 
+Options.
 
 - `--only source-one-dir,source-two-dir,...`  only build given source(s). multiple sources are separated by coma.
 - `--no-misc` - do not build miscellaneous prerequisites given by `modules` section in pjam.json file
@@ -255,6 +255,23 @@ want to rebuild distibutive
 
 
 # pjam configuration file specification
-description coming soon
+
+    {
+        "stack" : "hello-world-example-stack",
+        "application": "HelloWorldApp",
+        "sources": [
+            "HelloWorldLib",
+            "HelloWorldApp"
+        ],
+        "modules": [
+            "DBIx::Class~0.08250",
+            "Pinto"
+        ]
+    }
+
+- `stack` - name of pinto stack all prerequisites will be add to
+- `application` - name of sub directory in project root directory holding source code for 'application' - the one to make distribution from
+- `sources` - is array of sub directories in project root directory  where all source codes ( parts to get built and compiled together ) reside
+- `modules` - is array of miscellaneous prerequisites, should follow `pinto pull` command format
 
 
