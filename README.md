@@ -25,18 +25,20 @@ may be to support other SCMs.
 Full explanation can be found in [wiki pages](https://github.com/melezhik/jam/wiki/Inroduction-to-pjam). 
 This is brief introduction. 
 
-Let's say we have perl project and we want to create distribution ready to deploy, holding all the dependencies.
-In the given example there are only 2 components of our project - an 'application' and a 'library'. 
-In real life may be much more elements.
+First off all pjam should be told project root directory, holding all necessary data to work with, so this is
+the directory holdig all source codes and pjam configuration file:
+
 
     $ ls -1 ./hello-world-example/
     HelloWorldApp/
     HelloWorldLib/
+    pjam.json
+    
+In this exmaple there are only 2 'parts' of our project - an 'application' and a 'library'. 
+In real life may be much more elements. Both directories hold source code which follows [cpan distribution](http://www.dagolden.com/index.php/1173/what-tools-should-you-use-to-create-a-cpan-distribution/)
+format and is stored under subversion SCM ( see the 'conventions and limitations' section ). 
 
-Both directories hold source code which follows [cpan distribution](http://www.dagolden.com/index.php/1173/what-tools-should-you-use-to-create-a-cpan-distribution/)
-format and is stored under subversion SCM ( see the 'conventions and limitations' section )
-
-First of all let's create pjam configuration file which describe the process of compiling and distribution.
+And then pjam configuration file which describe the process of compiling and distribution.
 
     
 
@@ -51,9 +53,9 @@ First of all let's create pjam configuration file which describe the process of 
         ]
     }
 
-The configuration file is pretty self-explanatory:
+The content of configuration file is pretty self-explanatory:
 
-- `sources` - is array of directories where source code ( parts to get built and compiled together ) resides. 
+- `sources` - is array of sub directories in project root directory where source codes resides. 
 It is necessarily to say, that _elements in `sources` are processed in order_, if element "A" is depended 
 on other element "B", than element "A" should be followed by element "B" in `sources` list.
 - an `application` parameter points to the _application source directory_ - the one to make distribution from,
@@ -271,7 +273,9 @@ want to rebuild distibutive
 
 - `stack` - name of pinto stack all prerequisites will be add to
 - `application` - name of sub directory in project root directory holding source code for 'application' - the one to make distribution from
-- `sources` - is array of sub directories in project root directory  where all source codes ( parts to get built and compiled together ) reside
-- `modules` - is array of miscellaneous prerequisites, should follow `pinto pull` command format
+- `sources` - is array of sub directories in project root directory  where all source codes reside. It may be treated as prerequisites 
+to get pulled to pinto stack and being added to application distibutive 
+- `modules` - is array of miscellaneous prerequisites, should follow `pinto pull` command format. It also may be treated as prerequisites 
+to get pulled to pinto stack and being added to application distibutive
 
 
