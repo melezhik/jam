@@ -34,13 +34,12 @@ the directory holdig all source codes and pjam configuration file:
     HelloWorldLib/
     pjam.json
     
-In this exmaple there are only 2 'parts' of our project - an 'application' and a 'library'. 
+In this exmaple there are only 2 parts (source codes) of our project - an 'application' and a 'library'. 
 In real life may be much more elements. Both directories hold source code which follows [cpan distribution](http://www.dagolden.com/index.php/1173/what-tools-should-you-use-to-create-a-cpan-distribution/)
 format and is stored under subversion SCM ( see the 'conventions and limitations' section ). 
 
 And then pjam configuration file which describe the process of compiling and distribution.
 
-    
 
     $ cat ./hello-world-example/pjam.json
 
@@ -68,7 +67,7 @@ Of course we should create it first:
 
     $ pinto new hello-world-example-stack
     
-Now it's time to give a try to pjam to create distributive ... and it's very easy!
+Now it's time to give a try to pjam to create distributive for our project, this may be done by one command:
 
     $ export PINTO_EDITOR=cat
     $ export PINTO_REPOSITORY_ROOT=/home/pinto/repo/
