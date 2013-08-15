@@ -25,7 +25,7 @@ may be to support other SCMs.
 Full explanation can be found in [wiki pages](https://github.com/melezhik/jam/wiki/Inroduction-to-pjam). 
 This is brief introduction. 
 
-First off all pjam should be told project root directory, holding all necessary data to work with, so this is
+First of all pjam should be told project root directory, holding all necessary data to work with, so this is
 the directory holdig all source codes and pjam configuration file:
 
 
