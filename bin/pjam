@@ -22,6 +22,7 @@ EOS
     opt :no_color, "do not colour output", :default => false
     opt :no_misc, "do not add miscellaneous prerequisites", :default => false
     opt :only, "only add given source(s). multiple sources are separated by comma", :type => :string, :default => nil
+    opt :only_pinto, "only do pinto phase, skip distribution phase", :default => false
 end
 
 
@@ -43,7 +44,7 @@ config = JSON.parse(File.read("#{project_id}/pjam.json"))
 
 misc_modules =  []
 
-if config.has_key? 'modules' and opts[:no_misc] == false
+if config.has_key? 'modules' and opts[:no_misc] == false and opts[:skip_pinto] == false
 
     if opts[:no_color] == true
 	puts "pulling / compiling misc modules"
@@ -114,6 +115,7 @@ sources_list.each do |src|
     
 end
 
+unless opts[:only_pinto] == true 
 
 misc_modules.each do |m|
 
@@ -160,3 +162,4 @@ end
 cmd = "cd #{project_id} && pinto install -s #{config['stack']} -l #{local_lib} -o 'test-only' PINTO/`cat current.txt` #{color_flag}"
 system(cmd) == true or raise "failed do cmd: #{cmd}"
 
+end
