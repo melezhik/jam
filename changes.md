@@ -1,3 +1,6 @@
+# 0.0.12
+- small bug fixes
+
 # 0.0.11
 - fix ruby gem description
 
