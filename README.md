@@ -69,7 +69,6 @@ Of course we should create it first:
     
 Now it's time to give a try to pjam to create distribution archive of our project, this may be done by single command:
 
-    $ export PINTO_EDITOR=cat
     $ export PINTO_REPOSITORY_ROOT=/home/pinto/repo/
     $ pjam -p ./hello-world-example
     
