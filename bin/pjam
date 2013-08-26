@@ -59,7 +59,7 @@ if config.has_key? 'modules' and opts[:no_misc] == false and opts[:skip_pinto] =
 	else
 	    puts dark { magenta { bold {  "pull #{m}" } } }
 	end
-	cmd ="pinto pull -s #{config['stack']} -v #{m} #{color_flag}"
+	cmd ="pinto pull -s #{config['stack']} -v --use-default-message #{m} #{color_flag}"
         system(cmd) == true or raise "failed do cmd: #{cmd}"
         
         misc_modules << m
@@ -105,7 +105,7 @@ sources_list.each do |src|
 	cmd ="cd #{project_id}/#{src} && pinto delete -v PINTO/#{distro_name} #{color_flag}"
         system(cmd) == true
 
-	cmd ="cd #{project_id}/#{src} && pinto add  -s #{config['stack']} -v #{distro_name} #{color_flag}"
+	cmd ="cd #{project_id}/#{src} && pinto add  -s #{config['stack']} -v --use-default-message #{distro_name} #{color_flag}"
         system(cmd) == true or raise "failed do cmd: #{cmd}"
 
         compile_list << distro_name
@@ -150,6 +150,7 @@ else
 end 
 
 cmd = "cd #{project_id}/#{config['application']} && rm -rf cpanlib && mkdir cpanlib/ && cp -r #{local_lib}/* cpanlib/ && rm -rf *.gz && ./Build realclean --quiet 1>/dev/null && perl Build.PL --quiet 1>/dev/null 2>module_build.err.log && ./Build manifest --quiet 2>/dev/null 1>/dev/null && ./Build dist --quiet 1>/dev/null && ln -fs `ls #{project_id}/#{config['application']}/*.gz` #{project_id}/current.tar.gz && echo -n `ls *.gz` > #{project_id}/current.txt"
+puts cmd
 system(cmd) == true or raise "failed do cmd: #{cmd}"
 
 

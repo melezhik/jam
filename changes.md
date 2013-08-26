@@ -1,3 +1,6 @@
+# 0.0.13
+- `--use-default-message` option added when adding / pulling / distros 
+
 # 0.0.12
 - small bug fixes
 

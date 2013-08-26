@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
 
   s.name        = 'pjam'
-  s.version     = '0.0.12.pre'
+  s.version     = '0.0.13.pre'
   s.date        = '2013-07-23'
   s.summary     = "smart pinto glue"
   s.description = "Pjam is glue between pinto and your scm. In other words pjam is a wrapper around pinto client to create distribution archive of perl applications from source code using pinto."
