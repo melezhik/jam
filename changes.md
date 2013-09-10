@@ -1,5 +1,6 @@
 # 0.0.13
 - `--use-default-message` option added when adding / pulling / distros 
+- `--only` parameter will force skipping making distributive 
 
 # 0.0.12
 - small bug fixes
