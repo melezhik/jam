@@ -9,6 +9,7 @@ config_file "#{ENV['HOME']}/.pjamd/config.yaml"
 set :bind, settings.bind || '0.0.0.0'
 set :port, settings.port || '80'
 set :root, settings.base_dir
+set :public_folder, settings.base_dir
 
 
 get %r{/build/(.*)} do |project|

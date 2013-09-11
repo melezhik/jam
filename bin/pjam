@@ -25,6 +25,14 @@ EOS
     opt :only_pinto, "only do pinto phase, skip distribution phase", :default => false
 end
 
+version_postfix = `date +-rev-%Y-%B-%d-%H-%M`.chomp!
+
+
+if opts[:no_color] == true
+	puts "generated version postfix: #{version_postfix}"
+else
+	puts dark { yellow { bold {  "generated version postfix: #{version_postfix}" } } }
+end
 
 project_id = "#{Dir.pwd}/#{opts[:p]}"
 local_lib = "#{project_id}/cpanlib"
@@ -68,10 +76,12 @@ if config.has_key? 'modules' and opts[:no_misc] == false and opts[:skip_pinto] =
 end
 
 sources_list = []
+only_list = []
 if opts[:only].nil?
     sources_list = config['sources']
 else
     p_only = opts[:only].split(/\s+/)
+    only_list = p_only	
     sources_list = config['sources'].select {|i| p_only.include? i }
 end
 
@@ -83,7 +93,7 @@ sources_list.each do |src|
     cmd = "cd #{project_id}/#{src} && rm -rf cpanlib && svn up "
     st = system(cmd) == true or  raise "failed do cmd: #{cmd}" 
 
-    cmd = "cd #{project_id}/#{src} && rm -rf *.gz && rm -rf MANIFEST && perl Build.PL --quiet 1>/dev/null 2>module_build.err.log  && ./Build realclean && perl Build.PL --quiet 1>/dev/null 2>module_build.err.log && ./Build manifest --quiet 2>/dev/null 1>/dev/null  && ./Build dist --quiet 1>/dev/null"
+    cmd = "export version_postfix='#{version_postfix}' && cd #{project_id}/#{src} && rm -rf *.gz && rm -rf MANIFEST && perl Build.PL --quiet 1>/dev/null 2>module_build.err.log  && ./Build realclean && perl Build.PL --quiet 1>/dev/null 2>module_build.err.log && ./Build manifest --quiet 2>/dev/null 1>/dev/null  && ./Build dist --quiet 1>/dev/null"
     system(cmd) == true or raise "failed do cmd: #{cmd}"
 
     distro_name = `cd #{project_id}/#{src} &&  ls *.gz`.chomp!
@@ -143,7 +153,7 @@ unless opts[:only_pinto] == true
 
 	end
 
-	if opts[:only].nil? || opts[:only] == config['application']
+	if only_list.empty? or only_list.include? config['application']
 
 		if opts[:no_color] == true
 		    puts "make distributive from #{config['application']}"
@@ -151,7 +161,7 @@ unless opts[:only_pinto] == true
 		    puts yellow { bold {  "make distributive from #{config['application']}" } } 
 		end 
 
-		cmd = "cd #{project_id}/#{config['application']} && rm -rf cpanlib && mkdir cpanlib/ && cp -r #{local_lib}/* cpanlib/ && rm -rf *.gz && ./Build realclean --quiet 1>/dev/null && perl Build.PL --quiet 1>/dev/null 2>module_build.err.log && ./Build manifest --quiet 2>/dev/null 1>/dev/null && ./Build dist --quiet 1>/dev/null && ln -fs `ls #{project_id}/#{config['application']}/*.gz` #{project_id}/current.tar.gz && echo -n `ls *.gz` > #{project_id}/current.txt"
+		cmd = "export version_postfix='#{version_postfix}' && cd #{project_id}/#{config['application']} && rm -rf cpanlib && mkdir cpanlib/ && cp -r #{local_lib}/* cpanlib/ && rm -rf *.gz && ./Build realclean --quiet 1>/dev/null && perl Build.PL --quiet 1>/dev/null 2>module_build.err.log && ./Build manifest --quiet 2>/dev/null 1>/dev/null && ./Build dist --quiet 1>/dev/null && ln -fs `ls #{project_id}/#{config['application']}/*.gz` #{project_id}/current.tar.gz && echo -n `ls *.gz` > #{project_id}/current.txt"
 		puts cmd
 		system(cmd) == true or raise "failed do cmd: #{cmd}"
 
