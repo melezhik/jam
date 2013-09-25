@@ -9,9 +9,8 @@ Gem::Specification.new do |s|
   s.email       = 'melezhik@gmail.com'
 
   s.executables <<  'pjam'
-  s.executables << 'pjam-server'
 
-  s.files       = ["lib/pjam.rb"]
+  s.files       = %w[ lib/pjam.rb  lib/pjam-server.rb  ]
 
   s.license = 'MIT'
   s.add_runtime_dependency "json"
