@@ -14,7 +14,7 @@ The explanation below will be connected to pjam client, for pjam server info see
 
 # prerequisites
 - pinto client should be installed and pjam should run on the same environment as pinto does. 
-- PINTO_REPOSITORY_ROOT and INTO_EDITOR should be set ( see the example of usage further ).
+- PINTO_REPOSITORY_ROOT  should be set ( see the example of usage further ).
 
 
 # installation
