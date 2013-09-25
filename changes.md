@@ -1,6 +1,7 @@
 # 0.0.13
 - `--use-default-message` option added when adding / pulling / distros 
 - `--only` parameter will force skipping making distributive 
+- pjam server now deals with pjam client flags via request
 
 # 0.0.12
 - small bug fixes

@@ -8,7 +8,9 @@ Gem::Specification.new do |s|
   s.authors     = ["Alexey Melezhik"]
   s.email       = 'melezhik@gmail.com'
 
-  s.executables << 'pjam'
+  s.executables <<  'pjam'
+  s.executables << 'pjam-server'
+
   s.files       = ["lib/pjam.rb"]
 
   s.license = 'MIT'
@@ -16,9 +18,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "term-ansicolor"
   s.add_runtime_dependency "trollop"
   s.add_runtime_dependency "sinatra"
-  s.add_runtime_dependency  "sinatra-contrib"
-  s.add_runtime_dependency  "thin"
-  
   s.homepage = 'https://github.com/melezhik/jam'
 
 end
