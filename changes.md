@@ -1,3 +1,6 @@
+# 0.1.0
+- first stable release
+
 # 0.0.13
 - `--use-default-message` option added when adding / pulling / distros 
 - `--only` parameter will force skipping making distributive 
