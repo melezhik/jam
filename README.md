@@ -6,6 +6,11 @@ Pjam is glue between [pinto](http://search.cpan.org/perldoc?Pinto) and your [scm
 In other words pjam is a wrapper around pinto client to create distribution archive of [perl](http://www.perl.org/) applications from
 source code using pinto.
 
+Pjam consists of two parts:
+- pjam client allowing you to create distribution archive from source code using pinto
+- [pjam server](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server) - web interface to pjam client allowing you to make some actions remotely ( limited pjam client api )
+
+The explanation below will be connected to pjam client, for pjam server info see [wiki pages](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server).
 
 # prerequisites
 - pinto client should be installed and pjam should run on the same environment as pinto does. 
@@ -25,7 +30,9 @@ may be to support other SCMs.
 Full explanation can be found in [wiki pages](https://github.com/melezhik/jam/wiki/Introduction-to-pjam). 
 This is brief introduction. 
 
-First of all pjam should be told _project root directory_, holding all necessary data to work with, so this is
+## pjam project directory
+
+First of all pjam should be told _pjam project directory_, holding all necessary data to work with, so this is
 the directory to contain all source codes and pjam configuration file:
 
 
@@ -33,12 +40,18 @@ the directory to contain all source codes and pjam configuration file:
     HelloWorldApp/
     HelloWorldLib/
     pjam.json
-    
+
+
+## pjam project parts
+
 In this example there are only 2 parts (source codes) of our project - an 'application' and a 'library'. 
 In real life may be much more sub elements. Both directories hold source code which should  follow [cpan distribution](http://www.dagolden.com/index.php/1173/what-tools-should-you-use-to-create-a-cpan-distribution/)
 format and be stored under subversion SCM ( see the 'conventions and limitations' section ). 
 
-And then pjam configuration file describes the process of creation of distribution archive.
+
+## pjam project configuration file
+
+pjam configuration file is stored in pjam project directory and describes the process of creation of distribution archive.
 
 
     $ cat ./hello-world-example/pjam.json
@@ -66,7 +79,9 @@ Of course we should create it first:
 
 
     $ pinto new hello-world-example-stack
-    
+
+## create distribution archive for given pjam project
+
 Now it's time to give a try to pjam to create distribution archive of our project, this may be done by single command:
 
     $ export PINTO_REPOSITORY_ROOT=/home/pinto/repo/
@@ -100,94 +115,7 @@ Now it's time to give a try to pjam to create distribution archive of our projec
     # +[rf-] DBD::mysql::db                                      0 CAPTTOFU/DBD-mysql-4.023.tar.gz
     # +[rf-] DBD::mysql::dr                                      0 CAPTTOFU/DBD-mysql-4.023.tar.gz
     # +[rf-] DBD::mysql::st                                      0 CAPTTOFU/DBD-mysql-4.023.tar.gz
-    # +[rf-] Bundle::DBI                                 12.008695 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::DBM                                         0.08 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::DBM::Statement                                 0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::DBM::Table                                     0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::DBM::db                                        0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::DBM::dr                                        0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::DBM::st                                        0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::ExampleP                               12.014310 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::ExampleP::db                                   0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::ExampleP::dr                                   0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::ExampleP::st                                   0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::File                                        0.41 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::File::DataSource::File                         0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::File::DataSource::Stream                       0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::File::Statement                                0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::File::Table                                    0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::File::TableSource::FileSystem                  0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::File::db                                       0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::File::dr                                       0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::File::st                                       0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::Gofer                                   0.015326 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::Gofer::Policy::Base                     0.010087 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::Gofer::Policy::classic                  0.010087 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::Gofer::Policy::pedantic                 0.010087 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::Gofer::Policy::rush                     0.010087 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::Gofer::Transport::Base                  0.014120 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::Gofer::Transport::corostream                   0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::Gofer::Transport::null                  0.010087 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::Gofer::Transport::pipeone               0.010087 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::Gofer::Transport::stream                0.014598 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::Gofer::db                                      0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::Gofer::dr                                      0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::Gofer::st                                      0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::NullP                                  12.014714 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::NullP::db                                      0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::NullP::dr                                      0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::NullP::st                                      0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::Proxy                                     0.2004 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::Proxy::RPC::PlClient                           0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::Proxy::db                                      0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::Proxy::dr                                      0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::Proxy::st                                      0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::Sponge                                 12.010002 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::Sponge::db                                     0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::Sponge::dr                                     0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBD::Sponge::st                                     0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBDI                                                0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI                                             1.627 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::Const::GetInfo::ANSI                    2.008696 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::Const::GetInfo::ODBC                    2.011373 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::Const::GetInfoReturn                    2.008696 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::Const::GetInfoType                      2.008696 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::DBD                                    12.015128 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::DBD::Metadata                           2.014213 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::DBD::SqlEngine                              0.06 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::DBD::SqlEngine::DataSource                     0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::DBD::SqlEngine::Statement                      0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::DBD::SqlEngine::Table                          0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::DBD::SqlEngine::TableSource                    0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::DBD::SqlEngine::TieMeta                        0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::DBD::SqlEngine::TieTables                      0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::DBD::SqlEngine::db                             0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::DBD::SqlEngine::dr                             0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::DBD::SqlEngine::st                             0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::FAQ                                     1.014934 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::Gofer::Execute                          0.014282 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::Gofer::Request                          0.012536 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::Gofer::Response                         0.011565 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::Gofer::Serializer::Base                 0.009949 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::Gofer::Serializer::DataDumper           0.009949 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::Gofer::Serializer::Storable             0.015585 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::Gofer::Transport::Base                  0.012536 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::Gofer::Transport::pipeone               0.012536 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::Gofer::Transport::stream                0.012536 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::Profile                                 2.015064 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::ProfileData                             2.010007 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::ProfileDumper                           2.015324 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::ProfileDumper::Apache                   2.014120 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::ProfileSubs                             0.009395 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::ProxyServer                               0.3005 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::ProxyServer::db                                0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::ProxyServer::dr                                0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::ProxyServer::st                                0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::PurePerl                                2.014285 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::SQL::Nano                               1.015543 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::SQL::Nano::Statement_                          0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::SQL::Nano::Table_                              0 TIMB/DBI-1.627.tar.gz
-    # +[rf-] DBI::Util::CacheMemory                       0.010314 TIMB/DBI-1.627.tar.gz
+    # ... output truncated ...
     # +[rf-] DBI::common                                         0 TIMB/DBI-1.627.tar.gz
     # +[rl-] HelloWorld::Lib                                v0.0.2 PINTO/HelloWorld-Lib-v0.0.2.tar.gz
     
@@ -235,7 +163,7 @@ And also we have distributive with _ALL_ dependencies inside ready to deploy:
     
     
 
-# pjam interface
+# pjam client interface
 
 Main usage, make distribution archive:
 
