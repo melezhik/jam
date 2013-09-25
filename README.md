@@ -42,7 +42,7 @@ the directory to contain all source codes and pjam configuration file:
     pjam.json
 
 
-## pjam projects parts
+## pjam project parts
 
 In this example there are only 2 parts (source codes) of our project - an 'application' and a 'library'. 
 In real life may be much more sub elements. Both directories hold source code which should  follow [cpan distribution](http://www.dagolden.com/index.php/1173/what-tools-should-you-use-to-create-a-cpan-distribution/)
@@ -51,7 +51,7 @@ format and be stored under subversion SCM ( see the 'conventions and limitations
 
 ## pjam project configuration file
 
-And then pjam configuration file describes the process of creation of distribution archive.
+pjam configuration file is stored in pjam project directory and describes the process of creation of distribution archive.
 
 
     $ cat ./hello-world-example/pjam.json
@@ -163,7 +163,7 @@ And also we have distributive with _ALL_ dependencies inside ready to deploy:
     
     
 
-# pjam interface
+# pjam client interface
 
 Main usage, make distribution archive:
 
