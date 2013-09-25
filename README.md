@@ -11,7 +11,7 @@ Pjam consists of two parts:
 - pjam client allowing you to create distribution archive from source code using pinto
 - [pjam server](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server) - web interface to pjam client allowing you to make some actions remotely ( limited pjam client api )
 
-The explanation below will be connected to pjam client, for pjam server info see [wiki pages](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server).
+The explanation below is about pjam client, for pjam server information see [wiki pages](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server).
 
 # prerequisites
 - pinto client should be installed and pjam should run on the same environment as pinto does. 
