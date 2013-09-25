@@ -30,7 +30,9 @@ may be to support other SCMs.
 Full explanation can be found in [wiki pages](https://github.com/melezhik/jam/wiki/Introduction-to-pjam). 
 This is brief introduction. 
 
-First of all pjam should be told _project root directory_, holding all necessary data to work with, so this is
+## pjam project directory
+
+First of all pjam should be told _pjam project directory_, holding all necessary data to work with, so this is
 the directory to contain all source codes and pjam configuration file:
 
 
@@ -38,7 +40,10 @@ the directory to contain all source codes and pjam configuration file:
     HelloWorldApp/
     HelloWorldLib/
     pjam.json
-    
+
+
+## pjam projects parts
+
 In this example there are only 2 parts (source codes) of our project - an 'application' and a 'library'. 
 In real life may be much more sub elements. Both directories hold source code which should  follow [cpan distribution](http://www.dagolden.com/index.php/1173/what-tools-should-you-use-to-create-a-cpan-distribution/)
 format and be stored under subversion SCM ( see the 'conventions and limitations' section ). 
