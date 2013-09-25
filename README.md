@@ -48,6 +48,9 @@ In this example there are only 2 parts (source codes) of our project - an 'appli
 In real life may be much more sub elements. Both directories hold source code which should  follow [cpan distribution](http://www.dagolden.com/index.php/1173/what-tools-should-you-use-to-create-a-cpan-distribution/)
 format and be stored under subversion SCM ( see the 'conventions and limitations' section ). 
 
+
+## pjam project configuration file
+
 And then pjam configuration file describes the process of creation of distribution archive.
 
 
@@ -76,7 +79,9 @@ Of course we should create it first:
 
 
     $ pinto new hello-world-example-stack
-    
+
+## create distribution archive for given pjam project
+
 Now it's time to give a try to pjam to create distribution archive of our project, this may be done by single command:
 
     $ export PINTO_REPOSITORY_ROOT=/home/pinto/repo/
