@@ -6,6 +6,7 @@ Pjam is glue between [pinto](http://search.cpan.org/perldoc?Pinto) and your [scm
 In other words pjam is a wrapper around pinto client to create distribution archive of [perl](http://www.perl.org/) applications from
 source code using pinto.
 
+## client and server 
 Pjam consists of two parts:
 - pjam client allowing you to create distribution archive from source code using pinto
 - [pjam server](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server) - web interface to pjam client allowing you to make some actions remotely ( limited pjam client api )
@@ -32,7 +33,7 @@ This is brief introduction.
 
 ## pjam project directory
 
-First of all pjam should be told _pjam project directory_, holding all necessary data to work with, so this is
+First of all pjam client should be told _pjam project directory_, holding all necessary data to work with, so this is
 the directory to contain all source codes and pjam configuration file:
 
 
@@ -82,7 +83,7 @@ Of course we should create it first:
 
 ## create distribution archive for given pjam project
 
-Now it's time to give a try to pjam to create distribution archive of our project, this may be done by single command:
+Now it's time to give a try to pjam client to create distribution archive of our project, this may be done by single command:
 
     $ export PINTO_REPOSITORY_ROOT=/home/pinto/repo/
     $ pjam -p ./hello-world-example
