@@ -6,6 +6,11 @@ Pjam is glue between [pinto](http://search.cpan.org/perldoc?Pinto) and your [scm
 In other words pjam is a wrapper around pinto client to create distribution archive of [perl](http://www.perl.org/) applications from
 source code using pinto.
 
+Pjam consists of two parts:
+- pjam client allowing you to create distribution archive from source code using pinto
+- pjam server - web interface to pjam client allowing you to make some actions remotely ( limited pjam client api )
+
+The explanation below will be connected to pjam client, for pjam server info see wiki pages.
 
 # prerequisites
 - pinto client should be installed and pjam should run on the same environment as pinto does. 
