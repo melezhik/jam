@@ -19,7 +19,7 @@ The explanation below will be connected to pjam client, for pjam server info see
 
 # installation
 
-    gem install pjam --pre
+    gem install pjam
     
 # conventions and limitations
 - sources should be stored in subversion SCM - I'd like to abolish this eventually, to support none SCM sources and
