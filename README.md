@@ -172,9 +172,8 @@ Main usage, make distribution archive:
 
 `project` - path to _project root directory_ (should contain pjam.json file and sub directories with sources)  
 
-Options:
+## options:
 
-- `--only source-one-dir,source-two-dir,...`  only process given source(s). multiple sources are separated by comma.
 - `--no-misc` - do not add miscellaneous prerequisites given by `modules` section in pjam.json file
 - `--skip-pinto` - skip pinto phase, only do distribution phase, useful when prerequisites  already in pinto stack and you only
 want to recreate distribution archive
@@ -182,6 +181,10 @@ want to recreate distribution archive
 - `--help` - print help info
 - `--version` - print pjam version
 
+## sources filter
+This feature allow you to process distinct sources, while skipping others.
+
+- `--only source-one-dir source-two-dir ...`  only process given source(s). multiple sources are separated by space.
 
 # pjam configuration file specification
 
