@@ -182,9 +182,11 @@ want to recreate distribution archive
 - `--version` - print pjam version
 
 ## sources filter
-This feature allow you to process distinct sources, while skipping others, multiple sources are separated by space.
 
-    `--only source-one-dir source-two-dir ...`
+This feature allows you to process distinct sources, while skipping others, multiple sources are separated by space when
+passed to source filter parameter
+
+`--only source-one-directory source-two-directory`
 
 # pjam configuration file specification
 
