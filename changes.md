@@ -1,4 +1,7 @@
 # 0.1.0
+- dry-run mode added
+
+# 0.1.0
 - first stable release
 
 # 0.0.13

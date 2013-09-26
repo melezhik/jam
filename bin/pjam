@@ -19,6 +19,7 @@ EOS
 
     opt :p, "path to project", :type => :string
     opt :skip_pinto, "skip pinto phase, only do distibution phase", :default => false
+    opt :dry_run, "run in dry-run mode; dry-run mode is enabled, only upcoming changes will be shown, no action will be taken", :default => false
     opt :no_color, "do not colour output", :default => false
     opt :no_misc, "do not add miscellaneous prerequisites", :default => false
     opt :only, "only add given source(s). multiple sources are separated by comma", :type => :string, :default => nil
@@ -27,18 +28,33 @@ end
 
 version_postfix = `date +-rev-%Y-%B-%d-%H-%M`.chomp!
 
-
-if opts[:no_color] == true
-	puts "generated version postfix: #{version_postfix}"
-else
-	puts dark { yellow { bold {  "generated version postfix: #{version_postfix}" } } }
+if (opts[:p].nil? || opts[:p].empty?)
+    Trollop::die :p, "must be set"
 end
 
 project_id = "#{Dir.pwd}/#{opts[:p]}"
 local_lib = "#{project_id}/cpanlib"
 
-if (opts[:p].nil? || opts[:p].empty?)
-    Trollop::die :p, "must be set"
+config = JSON.parse(File.read("#{project_id}/pjam.json"))
+
+sources_list = []
+only_list = []
+if opts[:only].nil?
+    sources_list = config['sources']
+else
+    p_only = opts[:only].split(/\s+/)
+    only_list = p_only	
+    sources_list = config['sources'].select {|i| p_only.include? i }
+end
+
+compile_list = []
+compile_list_pp = {}
+
+
+if opts[:no_color] == true
+	puts "generated version postfix: #{version_postfix}"
+else
+	puts dark { yellow { bold {  "generated version postfix: #{version_postfix}" } } }
 end
 
 
@@ -48,9 +64,29 @@ else
     color_flag = ''
 end
 
-config = JSON.parse(File.read("#{project_id}/pjam.json"))
-
 misc_modules =  []
+
+if opts[:dry_run] == true
+    if opts[:no_color] == true
+	puts "dry-run mode is enabled, only upcoming changes will be shown, no action will be taken"
+    else
+	puts dark { magenta  { bold {  "dry-run mode is enabled, only upcoming changes will be shown, no action will be taken" } } }
+    end
+
+	sources_list.each do |src|
+    		cmd = "cd #{project_id}/#{src} &&  svn diff -r BASE:HEAD . > dry-run.log"
+    		st = system(cmd) == true or  raise "failed do cmd: #{cmd}"
+
+		if opts[:no_color] == true
+			puts "upcoming changes for #{src}:"
+		else
+	    		puts dark { magenta  { bold {  "upcoming changes for #{src}:" } } }
+		end
+		
+		puts File.read("#{project_id}/#{src}/dry-run.log") 
+	end
+	exit(0)
+end
 
 if config.has_key? 'modules' and opts[:no_misc] == false and opts[:skip_pinto] == false
 
@@ -75,18 +111,6 @@ if config.has_key? 'modules' and opts[:no_misc] == false and opts[:skip_pinto] =
     end
 end
 
-sources_list = []
-only_list = []
-if opts[:only].nil?
-    sources_list = config['sources']
-else
-    p_only = opts[:only].split(/\s+/)
-    only_list = p_only	
-    sources_list = config['sources'].select {|i| p_only.include? i }
-end
-
-compile_list = []
-compile_list_pp = {}
 
 sources_list.each do |src|
 
@@ -178,3 +202,4 @@ unless opts[:only_pinto] == true
 	end
 
 end
+
