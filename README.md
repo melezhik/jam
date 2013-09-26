@@ -9,6 +9,7 @@ source code using pinto.
 ## client and server 
 Pjam consists of two parts:
 - pjam client allowing you to create distribution archive from source code using pinto
+- subversion client (`svn` command has to be valid )
 - [pjam server](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server) - is the web interface to pjam client, allowing you to take some actions remotely. It provides limited pjam client api.
 
 The explanation below is about pjam client, for pjam server information see [wiki pages](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server).
