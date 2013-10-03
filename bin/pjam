@@ -74,7 +74,7 @@ if opts[:dry_run] == true
     end
 
 	sources_list.each do |src|
-    		cmd = "cd #{project_id}/#{src} &&  svn log -r BASE:HEAD . > dry-run.log"
+    		cmd = "cd #{project_id}/#{src} &&  svn log -r BASE:HEAD --verbose . > dry-run.log"
     		st = system(cmd) == true or  raise "failed do cmd: #{cmd}"
 
 		if opts[:no_color] == true
