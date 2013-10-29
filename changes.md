@@ -1,3 +1,7 @@
+# 0.1.2
+- pinto repository root now may be taken from pjam configuration file
+- added override mode
+
 # 0.1.1
 - dry-run mode added
 
