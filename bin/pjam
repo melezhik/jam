@@ -17,7 +17,8 @@ Usage:
 where [options] are:
 EOS
 
-    opt :p, "path to project", :type => :string
+    opt :p, "path to project root directory", :type => :string
+    opt :c, "path to pjam configuration file, should be relative to project root directory", :type => :string	
     opt :skip_pinto, "skip pinto phase, only do distibution phase", :default => false
     opt :dry_run, "run in dry-run mode; dry-run mode is enabled, only upcoming changes will be shown, no action will be taken", :default => false
     opt :no_color, "do not colour output", :default => false
@@ -28,17 +29,30 @@ end
 
 version_postfix = `date +-rev-%Y-%B-%d-%H-%M`.chomp!
 
-if (opts[:p].nil? || opts[:p].empty?)
-    Trollop::die :p, "must be set"
+if opts[:p].nil?
+	project_id = Dir.pwd
+else
+	project_id = "#{Dir.pwd}/#{opts[:p]}"
 end
 
-project_id = "#{Dir.pwd}/#{opts[:p]}"
 local_lib = "#{project_id}/cpanlib"
 
-config = JSON.parse(File.read("#{project_id}/pjam.json"))
+if ((opts.has_key? :c) and (! opts[:c].nil? ))
+	config_path = "#{project_id}/#{opts[:c]}"
+else
+	config_path = "#{project_id}/pjam.json"
+end
+
+if opts[:no_color] == true
+	puts "path to pjam configuration file: #{config_path}"
+else
+	puts dark { green { bold {  "path to pjam configuration file: #{config_path}" } } }
+end
+
+config = JSON.parse(File.read(config_path))
 
 if config.has_key? 'repository'
-	repo_root = "-r #{config['reposity']}"
+	repo_root = "-r #{config['repository']}"
 else
 	repo_root = "-r #{ENV['PINTO_REPOSITORY_ROOT']}"
 end
@@ -174,6 +188,14 @@ sources_list.each do |src|
     end
     
 end
+
+if opts[:no_color] == true
+	puts "update packages list"
+else
+    	puts dark { magenta  { bold {  "update packages list" } } }
+end
+cmd = "pinto  list  -r #{repo_root}  -s #{config['stack']} --format %a/%f  --no-color | sort | uniq > #{project_id}/packages.txt"
+system(cmd) == true or raise "failed do cmd: #{cmd}"
 
 unless opts[:only_pinto] == true 
 
