@@ -18,6 +18,7 @@ where [options] are:
 EOS
 
     opt :p, "path to project root directory", :type => :string
+    opt :wd, "also pull/add deependencies for development", :default => false	
     opt :c, "path to pjam configuration file, should be relative to project root directory", :type => :string	
     opt :skip_pinto, "skip pinto phase, only do distibution phase", :default => false
     opt :dry_run, "run in dry-run mode; dry-run mode is enabled, only upcoming changes will be shown, no action will be taken", :default => false
@@ -34,6 +35,8 @@ if opts[:p].nil?
 else
 	project_id = "#{Dir.pwd}/#{opts[:p]}"
 end
+
+wd_flag = ( opts[:wd] == true ) ? "--wd" : ""
 
 local_lib = "#{project_id}/cpanlib"
 
@@ -141,7 +144,7 @@ if config.has_key? 'modules' and opts[:no_misc] == false and opts[:skip_pinto] =
 	else
 	    puts dark { magenta { bold {  "pull #{m}" } } }
 	end
-	cmd ="pinto #{repo_root} pull -s #{config['stack']} -v --use-default-message #{m} #{color_flag}"
+	cmd ="pinto #{repo_root} pull -s #{config['stack']} -v #{wd_flag} --use-default-message #{m} #{color_flag}"
         system(cmd) == true or raise "failed do cmd: #{cmd}"
         
         misc_modules << m
@@ -179,7 +182,7 @@ sources_list.each do |src|
         	system(cmd) == true
 	end
 
-	cmd ="cd #{project_id}/#{src} && pinto #{repo_root} add  -s #{config['stack']} -v --use-default-message #{distro_name} #{color_flag}"
+	cmd ="cd #{project_id}/#{src} && pinto #{repo_root} add  -s #{config['stack']} -v #{wd_flag} --use-default-message #{distro_name} #{color_flag}"
         system(cmd) == true or raise "failed do cmd: #{cmd}"
 
         compile_list << distro_name
@@ -194,7 +197,8 @@ if opts[:no_color] == true
 else
     	puts dark { magenta  { bold {  "update packages list" } } }
 end
-cmd = "pinto  list  -r #{repo_root}  -s #{config['stack']} --format %a/%f  --no-color | sort | uniq > #{project_id}/packages.txt"
+
+cmd = "pinto #{repo_root} list -s #{config['stack']} --format %a/%f  --no-color | sort | uniq > #{project_id}/packages.txt"
 system(cmd) == true or raise "failed do cmd: #{cmd}"
 
 unless opts[:only_pinto] == true 
