@@ -129,7 +129,7 @@ if opts[:dry_run] == true
 	exit(0)
 end
 
-if config.has_key? 'modules' and opts[:no_misc] == false and opts[:skip_pinto] == false
+if config.has_key? 'modules' and opts[:no_misc] == false
 
     if opts[:no_color] == true
 	puts "pulling misc modules"
