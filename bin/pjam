@@ -21,11 +21,14 @@ EOS
     opt :wd, "also pull/add deependencies for development", :default => false	
     opt :c, "path to pjam configuration file, should be relative to project root directory", :type => :string	
     opt :skip_pinto, "skip pinto phase, only do distibution phase", :default => false
+    opt :update, "in pinto phase update distibution archive if alerady exists in repository", :default => true
     opt :dry_run, "run in dry-run mode; dry-run mode is enabled, only upcoming changes will be shown, no action will be taken", :default => false
     opt :no_color, "do not colour output", :default => false
     opt :no_misc, "do not add miscellaneous prerequisites", :default => false
     opt :only, "only add given source(s). multiple sources are separated by comma", :type => :string, :default => nil
     opt :only_pinto, "only do pinto phase, skip distribution phase", :default => false
+    opt :env, "environmental varibales. setup in format env='a=1 b=2 c=3'", :type => :string, :default => nil
+
 end
 
 version_postfix = `date +-rev-%Y-%B-%d-%H-%M`.chomp!
@@ -45,6 +48,17 @@ if ((opts.has_key? :c) and (! opts[:c].nil? ))
 else
 	config_path = "#{project_id}/pjam.json"
 end
+
+env_string_arr =  ['export PINTO_DEBUG=0']
+
+unless opts[:env].nil?
+	opts[:env].split(' ').each do |ch|
+		env_string_arr << "export #{ch}"
+	end
+end
+
+env_string = env_string_arr.join ' && '
+
 
 if opts[:no_color] == true
 	puts "path to pjam configuration file: #{config_path}"
@@ -83,7 +97,7 @@ only_list = []
 if opts[:only].nil?
     sources_list = config['sources']
 else
-    p_only = opts[:only].split(/\s+/)
+    p_only = opts[:only].split(' ')
     only_list = p_only	
     sources_list = config['sources'].select {|i| p_only.include? i }
 end
@@ -177,13 +191,29 @@ sources_list.each do |src|
     	    puts dark { magenta  { bold {  "add #{src} [#{distro_name}] to pinto" } } }
         end
     
-	unless override == false
-		cmd ="cd #{project_id}/#{src} && pinto #{repo_root} delete -v PINTO/#{distro_name} #{color_flag}"
-        	system(cmd) == true
+	if opts[:update] == false
+		if ((system("cd #{project_id}/#{src} && pinto #{repo_root} list -D #{distro_name} --no-color | grep PINTO/#{distro_name}")) == true)
+			if opts[:no_color] == true
+			    puts "[#{distro_name}] already in pinto; skip update due to --no-update is enabled"
+			else
+    	    			puts dark { blue  { bold {  "[#{distro_name}] already in pinto; skip update due to --no-update is enabled" } } }
+        		end
+			update_distro = false
+		else		
+			update_distro = true 
+		end
+	else
+		update_distro = true 
 	end
 
-	cmd ="cd #{project_id}/#{src} && pinto #{repo_root} add  -s #{config['stack']} -v #{wd_flag} --use-default-message #{distro_name} #{color_flag}"
-        system(cmd) == true or raise "failed do cmd: #{cmd}"
+	if update_distro == true 
+		unless override == false
+			cmd ="cd #{project_id}/#{src} && pinto #{repo_root} delete -v PINTO/#{distro_name} #{color_flag}"
+        		system(cmd) == true
+		end
+		cmd ="cd #{project_id}/#{src} && pinto #{repo_root} add  -s #{config['stack']} -v #{wd_flag} --use-default-message #{distro_name} #{color_flag}"
+        	system(cmd) == true or raise "failed do cmd: #{cmd}"
+	end
 
         compile_list << distro_name
         compile_list_pp[distro_name] = src
@@ -211,7 +241,7 @@ unless opts[:only_pinto] == true
 		puts green { bold { "compile #{m}" } }
 	    end
     
-	    cmd = "pinto #{repo_root} install -s #{config['stack']} -l #{local_lib} -o 'q' #{m} #{color_flag}"
+	    cmd = "#{env_string} && pinto #{repo_root} install -s #{config['stack']} -l #{local_lib} -o 'q' #{m} #{color_flag}"
 	    system(cmd) == true or raise "failed do cmd: #{cmd}"
 	end
 
@@ -224,7 +254,7 @@ unless opts[:only_pinto] == true
 		puts green { bold { "compile #{compile_list_pp[d]} [#{d}]" } }
 	    end
     
-	    cmd = "pinto #{repo_root} install -s #{config['stack']} -l #{local_lib} -o 'q' PINTO/#{d} #{color_flag}"
+	    cmd = "#{env_string} && pinto #{repo_root} install -s #{config['stack']} -l #{local_lib} -o 'q' PINTO/#{d} #{color_flag}"
 	    system(cmd) == true or raise "failed do cmd: #{cmd}"
 
 	end
@@ -248,7 +278,7 @@ unless opts[:only_pinto] == true
 		    puts cyan { bold {  "testing #{config['application']}" } }
 		end 
 
-		cmd = "cd #{project_id} && pinto #{repo_root} install -s #{config['stack']} -l #{local_lib} -o 'test-only' PINTO/`cat current.txt` #{color_flag}"
+		cmd = "cd #{project_id} && #{env_string} && pinto #{repo_root} install -s #{config['stack']} -l #{local_lib} -o 'test-only' PINTO/`cat current.txt` #{color_flag}"
 		system(cmd) == true or raise "failed do cmd: #{cmd}"
 
 	end
