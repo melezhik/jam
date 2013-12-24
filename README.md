@@ -8,7 +8,7 @@ In other words pjam is a wrapper around pinto client to create distribution arch
 # client and server 
 pjam consists of two parts:
 - pjam client to create distribution archives from source code using pinto.
-- [pjam server](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server) to provide web interface to pjam client, so you can take some actions remotely. See [wiki pages](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server) for full details.
+- [pjam server](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server) to provide web interface to pjam client, so you can take some actions remotely. See [wiki pages](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server) for details.
 
 # prerequisites and conventions 
 - pinto client; `pinto` command should be in PATH. 
