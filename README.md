@@ -2,20 +2,21 @@
 
 Smart [pinto](https://github.com/thaljef/Pinto) glue. 
 
-Pjam is glue between [pinto](http://search.cpan.org/perldoc?Pinto) and your [scm](https://en.wikipedia.org/wiki/Revision_control). 
+pjam is glue between [pinto](http://search.cpan.org/perldoc?Pinto) and your [scm](https://en.wikipedia.org/wiki/Revision_control). 
 In other words pjam is a wrapper around pinto client to create distribution archive of [perl](http://www.perl.org/) applications from source code using pinto.
 
 # client and server 
-Pjam consists of two parts:
+pjam consists of two parts:
 - pjam client to create distribution archives from source code using pinto.
-- [pjam server](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server) - is the web interface to pjam client, allowing you to take some actions remotely. It provides limited pjam client api. See [wiki pages](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server) for full details.
+- [pjam server](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server) to provide web interface to pjam client, so you can take some actions remotely. See [wiki pages](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server) for full details.
 
 # prerequisites and conventions 
 - pinto client; `pinto` command should be in PATH. 
 - subversion client; `svn` command should be in PATH.
 - source codes must be strored under subversion SCM. 
 - every source code should have Build.PL.
-- 
+
+
 I'd like to ablish some of these in the feature and add support for me SCMs. Right now it *just fits my requirements*,
 but contribution is welcome.
 
@@ -23,7 +24,7 @@ but contribution is welcome.
 
     gem install pjam
     
-# Pjam client. Example of usage
+# pjam client usage example.
 
 Full explanation can be found in [wiki pages](https://github.com/melezhik/jam/wiki/Introduction-to-pjam). 
 This is brief introduction. 
