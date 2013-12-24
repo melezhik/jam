@@ -3,31 +3,27 @@
 Smart [pinto](https://github.com/thaljef/Pinto) glue. 
 
 Pjam is glue between [pinto](http://search.cpan.org/perldoc?Pinto) and your [scm](https://en.wikipedia.org/wiki/Revision_control). 
-In other words pjam is a wrapper around pinto client to create distribution archive of [perl](http://www.perl.org/) applications from
-source code using pinto.
+In other words pjam is a wrapper around pinto client to create distribution archive of [perl](http://www.perl.org/) applications from source code using pinto.
 
-## client and server 
+# client and server 
 Pjam consists of two parts:
-- pjam client allowing you to create distribution archive from source code using pinto
-- subversion client (`svn` command has to be valid )
-- [pjam server](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server) - is the web interface to pjam client, allowing you to take some actions remotely. It provides limited pjam client api.
+- pjam client to create distribution archives from source code using pinto.
+- [pjam server](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server) - is the web interface to pjam client, allowing you to take some actions remotely. It provides limited pjam client api. See [wiki pages](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server) for full details.
 
-The explanation below is about pjam client, for pjam server information see [wiki pages](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server).
-
-# prerequisites
-- pinto client should be installed and pjam should run on the same environment as pinto does. 
-- PINTO_REPOSITORY_ROOT  should be set ( see the example of usage further ).
-
+# prerequisites and conventions 
+- pinto client; `pinto` command should be in PATH. 
+- subversion client; `svn` command should be in PATH.
+- source codes must be strored under subversion SCM. 
+- every source code should have Build.PL.
+- 
+I'd like to ablish some of these in the feature and add support for me SCMs. Right now it *just fits my requirements*,
+but contribution is welcome.
 
 # installation
 
     gem install pjam
     
-# conventions and limitations
-- sources should be stored in subversion SCM - I'd like to abolish this eventually, to support none SCM sources and
-may be to support other SCMs.
-
-# example of usage
+# Pjam client. Example of usage
 
 Full explanation can be found in [wiki pages](https://github.com/melezhik/jam/wiki/Introduction-to-pjam). 
 This is brief introduction. 
