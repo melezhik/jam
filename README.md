@@ -2,10 +2,10 @@
 
 Smart [pinto](https://github.com/thaljef/Pinto) glue. 
 
-Pjam is the tools which  enables *automatic* creation of  [perl](http://www.perl.org/) applications distribution archives from source code ( kept under [scm](https://en.wikipedia.org/wiki/Revision_control ) using [pinto](http://search.cpan.org/perldoc?Pinto).
+Pjam is the tools which  enables *automatic* creation of  [perl](http://www.perl.org/) applications distribution archives from source code kept under [scm](https://en.wikipedia.org/wiki/Revision_control ) using [pinto](http://search.cpan.org/perldoc?Pinto).
 
 # client and server
- Pjam consists of two parts: pjam client  - is the command line utility to take all operations and [pjam server](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server) to provide remote access to pjam client with limited api. 
+Pjam consists of two parts: pjam client  - is the command line utility to take all operations and [pjam server](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server) to provide remote access to pjam client with limited api. 
 
 # prerequisites and conventions 
 - pinto client should be installed; `pinto` command should be in PATH. 
@@ -68,7 +68,6 @@ The source parameter is the array of sources directories, they should be  sub di
 ### application
 The application parameter points to the source directory to make distribution from. 
 
-In real life projects it might be much more sources. 
 
 ## create distribution archive using pjam
 
@@ -125,7 +124,7 @@ This feature allows you to process only given sources  ( and skip others ), mult
         ]
     }
 
--  `repository` - a pinto repository to download external dependencies ( cpan modules ) from.
+- `repository` - a pinto repository to download external dependencies ( cpan modules ) from.
 - `stack` - name of pinto stack in pinto repository ( given by `repository` parameter ), `default` if not set.
 - `application` -  the name of  source directory to make distribution from.
 - `sources` - is array of sources.
