@@ -100,28 +100,27 @@ Main usage, make distribution archive:
 
 ## options
 
-
-- `--p, -p`: path to project root directory, if not set current working, project root directory is equal current working directory.
+- `--p, -p`: path to project root directory, if not set - use current working directory.
 
 - `--c, -c <s>`:  path to pjam configuration file, should be relative to project root directory.
 
-- `--update, --no-update, -u`:   in pinto phase update distribution archive, even if it  already exists in pinto repository. (default: true)
+- `--update, --no-update, -u`:   in pinto phase update distribution archive, even if it  already exists in pinto repository. (default: true).
 
-- `--dry-run, -d`:   run in dry-run mode; if dry-run mode is enabled, only upcoming changes will be shown, no action will be taken. (default: false)
+- `--dry-run, -d`:   run in dry-run mode; if dry-run mode is enabled, only upcoming changes will be shown, no action will be taken. (default: false).
 
-- `--no-misc, -o`:  do not add miscellaneous prerequisites. See  `modules` section in pjam.json file. (default: false)
+- `--skip-pinto`:  skip pinto phase, only do distribution phase. Useful when prerequisites  are already in pinto repository and you only want to create distribution archive. (default: false).
 
-- `--skip-pinto`:  skip pinto phase, only do distribution phase. Useful when prerequisites  are already in pinto repository and you only want to create distribution archive. (default: false)
+- `--only-pinto, -y`:   only do pinto phase, skip distribution phase. (default: false).
 
- - `--only-pinto, -y`:   only do pinto phase, skip distribution phase. (default: false)
+- `--only, -l <s>`:   only add given source(s). multiple sources are separated by comma.  
 
- - `--only, -l <s>`:   only add given source(s). multiple sources are separated by comma.  
+- `--no-misc, -o`:  do not add miscellaneous prerequisites. See  `modules` section in pjam.json file. (default: false).
 
-- `--wd, -w`:   pull/add dependencies for development (default: true)
+- `--wd, -w`:   pull/add dependencies for development (default: true).
 
-- `--env, -e <s>`:   environmental varibales. setup in format env='a=1 b=2 c=3'
+- `--env, -e <s>`:   environmental varibales. setup in format `env='a=1 b=2 c=3'`.
 
-- `--no-color, -n`: disable color output. (default: false)
+- `--no-color, -n`: disable color output. (default: false).
 
 - `--help`: print help info.
 
