@@ -100,17 +100,32 @@ Main usage, make distribution archive:
 
 ## options
 
-- `-p` path to project root directory, if not set current working, project root directory is equal current working directory.
 
-- `--no-misc` - do not add miscellaneous prerequisites declared in `modules` section in pjam.json file.
+- `--p, -p`: path to project root directory, if not set current working, project root directory is equal current working directory.
 
-- `--skip-pinto` - skip pinto phase, do only distribution create phase, useful when prerequisites  already in pinto repository and you only want to create distribution archive.
+- `--c, -c <s>`:  path to pjam configuration file, should be relative to project root directory.
 
-- `--no-color` - disable color output
+- `--update, --no-update, -u`:   in pinto phase update distribution archive, even if it  already exists in pinto repository. (default: true)
 
-- `--help` - print help info
+- `--dry-run, -d`:   run in dry-run mode; if dry-run mode is enabled, only upcoming changes will be shown, no action will be taken. (default: false)
 
-- `--version` - print pjam version
+- `--no-misc, -o`:  do not add miscellaneous prerequisites. See  `modules` section in pjam.json file. (default: false)
+
+- `--skip-pinto`:  skip pinto phase, only do distribution phase. Useful when prerequisites  are already in pinto repository and you only want to create distribution archive. (default: false)
+
+ - `--only-pinto, -y`:   only do pinto phase, skip distribution phase. (default: false)
+
+ - `--only, -l <s>`:   only add given source(s). multiple sources are separated by comma.  
+
+- `--wd, -w`:   pull/add dependencies for development (default: true)
+
+- `--env, -e <s>`:   environmental varibales. setup in format env='a=1 b=2 c=3'
+
+- `--no-color, -n`: disable color output. (default: false)
+
+- `--help`: print help info.
+
+- `--version, -v`:   print version and exit.
 
 # sources filter
 
@@ -139,4 +154,5 @@ This feature allows you to process only given sources  ( and skip others ), mult
 - `application` -  the name of  source directory to make distribution from.
 - `sources` - is array of sources.
 - `modules` - is array of miscellaneous prerequisites, should follow `pinto pull` command format.  Modules get pulled to pinto repository ( during pinto phase ) and being added to distribution archive ( during distribution create phase ).
+
 
