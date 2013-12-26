@@ -106,7 +106,7 @@ Main usage, make distribution archive:
 
 This feature allows you to process only given sources  ( and skip others ), multiple sources may be  passed via `only` parameter, using comma separator
 
-`--only lib1 lib2 lib10`
+`--only 'lib1 lib2 lib10'`
 
 # pjam configuration file specification
 
