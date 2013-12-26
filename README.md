@@ -67,29 +67,27 @@ Then create configuration file:
 
 The content of configuration file is pretty self-explanatory:
 
-### repository
+## repository
 The repository parameter points to the pinto repository to download external dependencies ( CPAN modules ) from. Before we start create distribution archive we should create pinto repository and optionally a stack:
 
     $ pinto --root init /var/pinto/repos/my-repo
  
 Check out [pinto documentation](http://search.cpan.org/perldoc?Pinto%3A%3AManual%3A%3ATutorial) to get know what pinto stacks and repositories are. 
 
-### sources 
+## sources 
 The source parameter is the array of sources directories, they should be  sub directories of the project root directory.  It is necessarily to say, that  sources in `sources` array _are processed in order_, so if source "A" is _depended_ on source  "B" ( has perl module dependencies, defined in "B" ), than  "A" should be followed by "B" in `sources` list.
 
-### application
+## application
 The application parameter points to the source directory to make distribution from. 
 
 
-## create distribution archive using pjam
-
-Now we are ready to create distribution archive based on our project, using pjam power:
+After setting our project  we are ready to create distribution archive using pjam power:
 
     $ cd my-application
     $ pjam
         
 
-Now we have  distribution archive located at application/my-app.v0.1.0.tar.gz with all our dependencies  taken from pinto repository:
+Now we have  distribution archive located at my-application/application/my-app.v0.1.0.tar.gz with all our dependencies  taken from pinto repository:
 
      $ pinto -r  /var/pinto/repos/my-repo list 
 
