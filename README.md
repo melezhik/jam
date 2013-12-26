@@ -2,7 +2,7 @@
 
 Smart [pinto](https://github.com/thaljef/Pinto) glue. 
 
-Pjam is the tools which  enables *automatic* creation of  [perl](http://www.perl.org/) applications distribution archives from source code kept under [scm](https://en.wikipedia.org/wiki/Revision_control ) using [pinto](http://search.cpan.org/perldoc?Pinto).
+Pjam is the tool which  enables *automatic* creation of  [perl](http://www.perl.org/) applications distribution archives from source code kept under [subversion scm](http://subversion.tigris.org/) using [pinto](http://search.cpan.org/perldoc?Pinto).
 
 # client and server
 Pjam consists of two parts: pjam client  - is the command line utility to take all operations and [pjam server](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server) to provide remote access to pjam client with limited api. 
@@ -33,7 +33,19 @@ Sources are sub directories inside project root directory with source codes to b
 ## configuration file
 Configuration file is stored in the root directory and describes the process of distribution archive creation.
 
-Let's create project root directory and add some sources:
+## build phases
+When pjam start to create distribution archive, it does it in two phases:
+
+### pinto phase
+First of all pjam collect all dependencies information, stored in sources directories and add them into pinto repository.
+
+### distribution phase
+Then if everything is ok with pinto phase and no errors are occurred, pjam 
+starts distribution archive creation, all the dependencies are get fetched from pinto repository and install locally, if installation is ok, distribution archive is created including all locally installed modules.
+
+
+# hello world example
+First, let's create project root directory and add some sources:
 
     $ mkdir  my-application
     $ cd my-application 
@@ -56,7 +68,7 @@ Then create configuration file:
 The content of configuration file is pretty self-explanatory:
 
 ### repository
-The repository parameter points to the pinto repository to download external dependencies ( cpan modules ) from. Before we start create distribution archive we should create pinto repository and optionally a stack :
+The repository parameter points to the pinto repository to download external dependencies ( CPAN modules ) from. Before we start create distribution archive we should create pinto repository and optionally a stack:
 
     $ pinto --root init /var/pinto/repos/my-repo
  
