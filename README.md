@@ -1,8 +1,13 @@
-# pjam
+# synopsis
 
 Smart [pinto](https://github.com/thaljef/Pinto) glue. 
 
-Pjam is the tool which  enables *automatic* creation of  [perl](http://www.perl.org/) applications distribution archives from source code kept under [subversion scm](http://subversion.tigris.org/) using [pinto](http://search.cpan.org/perldoc?Pinto).
+# description
+
+[Pinto](http://search.cpan.org/perldoc?Pinto) is an application for creating and managing a custom CPAN-like repository of Perl modules.
+
+Pjam is a tool which  enables *automatic* creation of  [perl](http://www.perl.org/) applications distribution archives from source code. Pjam enables continues integration in PERL. Right now pjam fits only Module:Build based projects ( Build.PL should be provided ) kept under [subversion SCM](http://subversion.tigris.org/), but I may change this if interest will be shown.
+
 
 # client and server
 Pjam consists of two parts: pjam client  - is the command line utility to take all operations and [pjam server](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server) to provide remote access to pjam client with limited api. 
