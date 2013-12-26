@@ -10,7 +10,7 @@ opts = Trollop::options do
 
   version "pjam 0.1.2 (c) 2013 Alexey Melezhik / melezhik@gmail.com"
   banner <<-EOS
-smart glue between pinto and your scm.
+Pjam is a tool which enables automatic creation of perl applications distribution archives from source code using pinto
 
 Usage:
        pjam [options]
@@ -18,16 +18,16 @@ where [options] are:
 EOS
 
     opt :p, "path to project root directory", :type => :string
-    opt :wd, "also pull/add deependencies for development", :default => false	
+    opt :wd, "add dependencies for development", :default => false	
     opt :c, "path to pjam configuration file, should be relative to project root directory", :type => :string	
     opt :skip_pinto, "skip pinto phase, only do distibution phase", :default => false
-    opt :update, "in pinto phase update distibution archive if alerady exists in repository", :default => true
-    opt :dry_run, "run in dry-run mode; dry-run mode is enabled, only upcoming changes will be shown, no action will be taken", :default => false
-    opt :no_color, "do not colour output", :default => false
+    opt :update, "update distibution archive if it alerady exists in repository", :default => true
+    opt :dry_run, "run in dry-run mode; only upcoming changes will be shown, no action will be taken", :default => false
+    opt :no_color, "disable colour output", :default => false
     opt :no_misc, "do not add miscellaneous prerequisites", :default => false
     opt :only, "only add given source(s). multiple sources are separated by comma", :type => :string, :default => nil
     opt :only_pinto, "only do pinto phase, skip distribution phase", :default => false
-    opt :env, "environmental varibales. setup in format env='a=1 b=2 c=3'", :type => :string, :default => nil
+    opt :env, "set environmental varibales. use format env='a=1 b=2 c=3'", :type => :string, :default => nil
 
 end
 
@@ -123,9 +123,9 @@ misc_modules =  []
 
 if opts[:dry_run] == true
     if opts[:no_color] == true
-	puts "dry-run mode is enabled, only upcoming changes will be shown, no action will be taken"
+	puts "dry-run mode is enabled; only upcoming changes will be shown; no action will be taken"
     else
-	puts dark { magenta  { bold {  "dry-run mode is enabled, only upcoming changes will be shown, no action will be taken" } } }
+	puts dark { magenta  { bold {  "dry-run mode is enabled; only upcoming changes will be shown; no action will be taken" } } }
     end
 
 	sources_list.each do |src|
@@ -135,7 +135,7 @@ if opts[:dry_run] == true
 		if opts[:no_color] == true
 			puts "upcoming changes for #{src}:"
 		else
-	    		puts dark { magenta  { bold {  "upcoming changes for #{src}:" } } }
+	    		puts dark { magenta  { bold {  "upcoming changes for source #{src}:" } } }
 		end
 		
 		puts File.read("#{project_id}/#{src}/dry-run.log") 
@@ -146,9 +146,9 @@ end
 if config.has_key? 'modules' and opts[:no_misc] == false
 
     if opts[:no_color] == true
-	puts "pulling misc modules"
+	puts "pull misc modules to pinto repository"
     else
-	puts dark { blue  { bold {  "pulling misc modules" } } }
+	puts dark { blue  { bold {  "pull misc modules to pinto repository" } } }
     end
     
     config['modules'].each do |m|
@@ -186,9 +186,9 @@ sources_list.each do |src|
     else
 
 	if opts[:no_color] == true
-	    puts "add #{src} [#{distro_name}] to pinto"
+	    puts "add source #{src} [#{distro_name}] to pinto"
 	else
-    	    puts dark { magenta  { bold {  "add #{src} [#{distro_name}] to pinto" } } }
+    	    puts dark { magenta  { bold {  "add source #{src} [#{distro_name}] to pinto" } } }
         end
     
 	if opts[:update] == false
@@ -223,9 +223,9 @@ sources_list.each do |src|
 end
 
 if opts[:no_color] == true
-	puts "update packages list"
+	puts "update packages list file"
 else
-    	puts dark { magenta  { bold {  "update packages list" } } }
+    	puts dark { magenta  { bold {  "update packages list file" } } }
 end
 
 cmd = "pinto #{repo_root} list -s #{config['stack']} --format %a/%f  --no-color | sort | uniq > #{project_id}/packages.txt"
@@ -262,9 +262,9 @@ unless opts[:only_pinto] == true
 	if only_list.empty? or only_list.include? config['application']
 
 		if opts[:no_color] == true
-		    puts "make distributive from #{config['application']}"
+		    puts "make distributive from source #{config['application']}"
 		else
-		    puts yellow { bold {  "make distributive from #{config['application']}" } } 
+		    puts yellow { bold {  "make distributive from source #{config['application']}" } } 
 		end 
 
 		cmd = "export version_postfix='#{version_postfix}' && cd #{project_id}/#{config['application']} && rm -rf cpanlib && mkdir cpanlib/ && cp -r #{local_lib}/* cpanlib/ && rm -rf *.gz && ./Build realclean --quiet 1>/dev/null && perl Build.PL --quiet 1>/dev/null 2>module_build.err.log && ./Build manifest --quiet 2>/dev/null 1>/dev/null && ./Build dist --quiet 1>/dev/null && ln -fs `ls #{project_id}/#{config['application']}/*.gz` #{project_id}/current.tar.gz && echo -n `ls *.gz` > #{project_id}/current.txt"
@@ -273,9 +273,9 @@ unless opts[:only_pinto] == true
 
 
 		if opts[:no_color] == true
-		    puts "testing #{config['application']}"
+		    puts "testing source #{config['application']}"
 		else
-		    puts cyan { bold {  "testing #{config['application']}" } }
+		    puts cyan { bold {  "testing source #{config['application']}" } }
 		end 
 
 		cmd = "cd #{project_id} && #{env_string} && pinto #{repo_root} install -s #{config['stack']} -l #{local_lib} -o 'test-only' PINTO/`cat current.txt` #{color_flag}"
