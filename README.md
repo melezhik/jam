@@ -20,7 +20,7 @@ I'd like to abolish some of these limitations in the feature, right now it *just
 
     gem install pjam
     
-# pjam client usage
+# pjam concept
 
 First of all let's understand a few simple things about pjam architecture.
 
