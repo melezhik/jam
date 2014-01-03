@@ -6,7 +6,7 @@ Smart [pinto](https://github.com/thaljef/Pinto) glue.
 
 [Pinto](http://search.cpan.org/perldoc?Pinto) is an application for creating and managing a custom CPAN-like repository of Perl modules.
 
-Pjam is a tool which  enables *automatic* creation of  [perl](http://www.perl.org/) applications distribution archives from source code. Pjam enables continues integration in PERL. Right now pjam fits only Module:Build based projects ( Build.PL should be provided ) kept under [subversion SCM](http://subversion.tigris.org/), but I may change this if interest will be shown.
+Pjam is a tool which  enables *automatic* creation of  [perl](http://www.perl.org/) applications distribution archives from source code. Pjam enables continues integration in PERL. Right now pjam fits only Module::Build based projects ( Build.PL should be provided ) kept under [subversion SCM](http://subversion.tigris.org/), but I may change this if interest will be shown.
 
 
 # client and server
@@ -39,14 +39,14 @@ Sources are sub directories inside project root directory with source codes to b
 Configuration file is stored in the root directory and describes the process of distribution archive creation.
 
 ## build phases
-When pjam start to create distribution archive, it does it in two phases:
+When pjam starts to create distribution archive, it does it in two phases:
 
 ### pinto phase
 First of all pjam collect all dependencies information, stored in sources directories and add them into pinto repository.
 
 ### distribution phase
 Then if everything is ok with pinto phase and no errors are occurred, pjam 
-starts distribution archive creation, all the dependencies are get fetched from pinto repository and install locally, if installation is ok, distribution archive is created including all locally installed modules.
+starts distribution archive creation, all the dependencies are get fetched from pinto repository and are installed locally, if installation is ok, distribution archive is created including all locally installed modules.
 
 
 # hello world example
