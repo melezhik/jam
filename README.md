@@ -6,11 +6,11 @@ Smart [pinto](https://github.com/thaljef/Pinto) glue.
 
 [Pinto](http://search.cpan.org/perldoc?Pinto) is an application for creating and managing a custom CPAN-like repository of Perl modules.
 
-Pjam is a tool which  enables *automatic* creation of  [perl](http://www.perl.org/) applications distribution archives from source code. Pjam enables continues integration in PERL. Right now pjam fits only Module::Build based projects ( Build.PL should be provided ) kept under [subversion SCM](http://subversion.tigris.org/), but I may change this if interest will be shown.
+Pjam is a tool which  enables *automatic* creation of  [perl](http://www.perl.org/) applications distribution archives from source code.  So pjam can be used in continues integration for PERL.  Current version only supports Module::Build based projects ( valid Build.PL should be provided ) kept under [subversion SCM](http://subversion.tigris.org/), but it may be changed if interest will be shown.
 
 
 # client and server
-Pjam consists of two parts: pjam client  - is the command line utility to take all operations and [pjam server](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server) to provide remote access to pjam client with limited api. 
+Pjam consists of two parts: pjam client  - is the command line utility to take all operations and [pjam server](https://github.com/melezhik/jam/wiki/Introduction-to-pjam-server) to provide remote access to pjam client's limited api. 
 
 # prerequisites and conventions 
 - pinto client should be installed; `pinto` command should be in PATH. 
@@ -18,8 +18,7 @@ Pjam consists of two parts: pjam client  - is the command line utility to take a
 - source codes must be stored under subversion SCM. 
 - every source code directory should have Build.PL file.
 
-
-I'd like to abolish some of these limitations in the feature, right now it *just fits my requirements*, but any contribution is welcome.
+I'd like to abolish some points in this list eventually, but at the moment  it *just fits my requirements*, ( any contribution is welcome ).
 
 # installation
 
@@ -30,10 +29,10 @@ I'd like to abolish some of these limitations in the feature, right now it *just
 First of all let's understand a few simple things about pjam architecture.
 
 ## pjam project 
-Pjam client is the directory centric  tool. All data necessary to build distribution archive should be  placed in single directory, called _project root directory_ hereby this directory represents _pjam project_. Every pjam project  hereby _produce_ a single distribution archive. You may have as many pjam projects as you want to create various distribution archives. Project root directory contains two logical data parts:
+Pjam client is the directory centric  tool. All data necessary to build distribution archive should be  placed in single directory, called _project root directory_ hereby this directory represents a _pjam project_. Every pjam project  hereby _produce_ a single distribution archive. You may have as many pjam projects as you want to create various distribution archives. Project root directory contains two logical data parts:
 
 ## sources
-Sources are sub directories inside project root directory with source codes to build distribution archive from. Every source directory should valid Build.PL files to  satisfy [cpan distribution](http://www.dagolden.com/index.php/1173/what-tools-should-you-use-to-create-a-cpan-distribution/) requirements and be kept by subversion SCM. Sources are non*CPAN dependencies to be included in distribution archive. CPAN dependencies are declared in standard way  in Build.PL files in every source directory.
+Sources are sub directories inside project root directory with source code to build distribution archive from. Every source directory should include valid Build.PL files to  satisfy [cpan distribution](http://www.dagolden.com/index.php/1173/what-tools-should-you-use-to-create-a-cpan-distribution/) requirements and be kept by subversion SCM. Sources are non*CPAN dependencies to be included in distribution archive. CPAN dependencies are declared in standard way  in Build.PL files in every source directory.
 
 ## configuration file
 Configuration file is stored in the root directory and describes the process of distribution archive creation.
